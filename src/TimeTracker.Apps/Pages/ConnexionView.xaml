@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TimeTracker.Apps.ViewModels" 
+             x:DataType="viewmodels:ConnexionViewModel"
+             x:Class="TimeTracker.Apps.Pages.ConnexionView">
+    <ContentPage.Content>
+        <StackLayout 
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="CenterAndExpand"
+            Spacing="10">
+
+            <Label Text="Login"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   TextColor="Black"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   />
+
+            <Entry x:Name="login" 
+                Text="{Binding Login}"
+                Placeholder="E-mail" 
+                Keyboard="Email"           
+                VerticalOptions="Center"
+                HorizontalOptions="FillAndExpand"
+                Margin="50,0,50,0"
+                />
+
+            <Label Text="Mot de passe"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   TextColor="Black"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"/>
+
+            <Entry x:Name="password" 
+                   Placeholder="Mot de passe" 
+                   IsPassword="True"
+                   VerticalOptions="Center"
+                   HorizontalOptions="FillAndExpand"
+                   Margin="50,0,50,0"/>
+
+            <Button
+                Text="Connexion"
+                BackgroundColor="DarkBlue"
+                CornerRadius="32"
+                TextColor="White"
+                HorizontalOptions="CenterAndExpand"
+                Padding="30,15,30,15"
+                Command="{Binding ConnexionAcceuil}"/>
+
+            <Label Text="Pas encore inscrit?"
+                   FontSize="16"
+                   TextColor="Black"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   Margin="0,30,0,0"/>
+
+            <Button
+                Text="Inscription"
+                BackgroundColor="White"
+                BorderWidth="1"
+                BorderColor="Blue"
+                CornerRadius="32"
+                TextColor="Black"
+                HorizontalOptions="CenterAndExpand"
+                Padding="30,15,30,15"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
