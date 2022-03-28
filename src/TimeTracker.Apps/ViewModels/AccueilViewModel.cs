@@ -28,7 +28,7 @@ namespace TimeTracker.Apps.ViewModels
         {
             VoirProfil = new Command(GoToProfil);
             AjoutProjet = new Command(GoToProjet);
-            creerJeuTest();
+            //creerJeuTest();
         }
 
         private void GoToProfil()
@@ -46,9 +46,9 @@ namespace TimeTracker.Apps.ViewModels
 
         private void creerJeuTest()
         {
-            _projets.Add(new Projet(0, "Projet1", "Le projet 1", 0));
-            _projets.Add(new Projet(1, "Projet2", "Le projet 2", 0));
-            _projets.Add(new Projet(2, "Projet3", "Le projet 3", 0));
+            Projets.Add(new Projet(0, "Projet1", "Le projet 1", 0));
+            Projets.Add(new Projet(1, "Projet2", "Le projet 2", 0));
+            Projets.Add(new Projet(2, "Projet3", "Le projet 3", 0));
         }
     }
 }
