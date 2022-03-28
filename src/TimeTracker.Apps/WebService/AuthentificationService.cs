@@ -53,7 +53,7 @@ namespace TimeTracker.Apps.WebService
 
             var resquest = new HttpRequestMessage()
             {
-                RequestUri = new Uri(Dtos.Urls.HOST + Dtos.Urls.CREATE_USER),
+                RequestUri = new Uri(Dtos.Urls.HOST +"/ "+ Dtos.Urls.CREATE_USER),
                 Method = HttpMethod.Post,
                 Content = new StringContent(body, Encoding.UTF8, "application/json")
             };
@@ -62,6 +62,8 @@ namespace TimeTracker.Apps.WebService
 
             if (response.IsSuccessStatusCode)
             {
+                
+
                 JObject data = JObject.Parse(response.Content.ReadAsStringAsync().Result);
                 if (data.GetValue("is_success").ToString() == "True")
                 {
@@ -72,11 +74,14 @@ namespace TimeTracker.Apps.WebService
                     Preferences.Set("token_type", jsonData.TokenType);
                 }
             }
+            else
+            {
+                Console.WriteLine("Inscription fonctionne pas");
+            }
         }
 
         public static async Task Connexion(String loginRequete, String passwordRequete)
         {
-            Console.WriteLine("JE suis LA");
             HttpClient client = new HttpClient();
             LoginWithCredentialsRequest login = new LoginWithCredentialsRequest()
             {
@@ -99,27 +104,31 @@ namespace TimeTracker.Apps.WebService
 
             if (response.IsSuccessStatusCode)
             {
+
                 JObject data = JObject.Parse(response.Content.ReadAsStringAsync().Result);
                 if (data.GetValue("is_success").ToString() == "True")
                 {
                     LoginResponse jsonData = JsonConvert.DeserializeObject<LoginResponse>(data.GetValue("data").ToString());
 
-                    Console.WriteLine("acess Token : " + jsonData.AccessToken);
-
                     Preferences.Set("access_token", jsonData.AccessToken);
                     Preferences.Set("refresh_token", jsonData.RefreshToken);
                     Preferences.Set("token_type", jsonData.TokenType);
+
+                    Console.WriteLine(Preferences.Get("access_token", null));
                 }
+            }
+            else
+            {
+                Console.WriteLine("Login fonctionne pas");
             }
         }
 
         public static async Task Refresh()
         {
-            //var request = RequestInscription(Method.Post);
             HttpClient client = new HttpClient();
             RefreshRequest refresh = new RefreshRequest()
             {
-                RefreshToken = Preferences.Get("refresh_token", ""),
+                RefreshToken = Preferences.Get("refresh_token", null),
                 ClientId = CLIENT_ID,
                 ClientSecret = CLIENT_SECRET
             };
@@ -128,7 +137,7 @@ namespace TimeTracker.Apps.WebService
 
             var resquest = new HttpRequestMessage()
             {
-                RequestUri = new Uri(Dtos.Urls.HOST + "/login"),
+                RequestUri = new Uri(Dtos.Urls.HOST + Dtos.Urls.REFRESH_TOKEN),
                 Method = HttpMethod.Post,
                 Content = new StringContent(body, Encoding.UTF8, "application/json")
             };
@@ -148,6 +157,10 @@ namespace TimeTracker.Apps.WebService
                     Preferences.Set("refresh_token", jsonData.RefreshToken);
                     Preferences.Set("token_type", jsonData.TokenType);
                 }
+            }
+            else
+            {
+                Console.WriteLine("Refresh fonctionne pas");
             }
         }
     }
