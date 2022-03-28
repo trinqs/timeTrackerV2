@@ -29,9 +29,12 @@ namespace TimeTracker.Apps.ViewModels
 
 		public ICommand ConnexionAcceuil { get; }
 
+		public ICommand GoToInscription { get; }
+
 		public ConnexionViewModel()
 		{
 			ConnexionAcceuil = new Command(Connexion);
+			GoToInscription = new Command(Inscription);
 		}
 
 		private async void Connexion()
@@ -40,8 +43,8 @@ namespace TimeTracker.Apps.ViewModels
 			try
 			{
 				INavigationService navigationService = DependencyService.Get<INavigationService>();
-				await navigationService.PushAsync<AccueilView>(null,NavigationMode.Replace);
-            }
+				await navigationService.PushAsync<AccueilView>(null, NavigationMode.ReplaceAll);
+			}
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.Message);
@@ -51,6 +54,23 @@ namespace TimeTracker.Apps.ViewModels
 				}
 			}
 
-        }
-    }
+		}
+
+		private async void Inscription()
+		{
+			try
+			{
+				INavigationService navigationService = DependencyService.Get<INavigationService>();
+				await navigationService.PushAsync<RegisterView>();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+				if (ex.InnerException != null)
+				{
+					Console.WriteLine("Inner exception: {0}", ex.InnerException);
+				}
+			}
+		}
+	}
 }
