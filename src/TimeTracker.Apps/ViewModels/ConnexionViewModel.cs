@@ -40,6 +40,8 @@ namespace TimeTracker.Apps.ViewModels
 		private async void Connexion()
 		{
 			await AuthentificationService.Connexion(Login, Password);
+
+			
 			try
 			{
 				INavigationService navigationService = DependencyService.Get<INavigationService>();
