@@ -40,7 +40,7 @@ namespace TimeTracker.Apps.ViewModels
 			try
 			{
 				INavigationService navigationService = DependencyService.Get<INavigationService>();
-            await navigationService.PushAsync<AccueilView>();
+				await navigationService.PushAsync<AccueilView>(null,NavigationMode.Replace);
             }
 			catch (Exception ex)
 			{
