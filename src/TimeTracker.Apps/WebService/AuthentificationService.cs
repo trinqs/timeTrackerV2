@@ -53,7 +53,7 @@ namespace TimeTracker.Apps.WebService
 
             var resquest = new HttpRequestMessage()
             {
-                RequestUri = new Uri(Dtos.Urls.HOST +"/ "+ Dtos.Urls.CREATE_USER),
+                RequestUri = new Uri(Dtos.Urls.HOST + "/ " + Dtos.Urls.CREATE_USER),
                 Method = HttpMethod.Post,
                 Content = new StringContent(body, Encoding.UTF8, "application/json")
             };
@@ -62,7 +62,7 @@ namespace TimeTracker.Apps.WebService
 
             if (response.IsSuccessStatusCode)
             {
-                
+
 
                 JObject data = JObject.Parse(response.Content.ReadAsStringAsync().Result);
                 if (data.GetValue("is_success").ToString() == "True")
@@ -95,7 +95,7 @@ namespace TimeTracker.Apps.WebService
 
             var resquest = new HttpRequestMessage()
             {
-                RequestUri = new Uri(Dtos.Urls.HOST +"/"+ Dtos.Urls.LOGIN),
+                RequestUri = new Uri(Dtos.Urls.HOST + "/" + Dtos.Urls.LOGIN),
                 Method = HttpMethod.Post,
                 Content = new StringContent(body, Encoding.UTF8, "application/json")
             };
@@ -113,8 +113,6 @@ namespace TimeTracker.Apps.WebService
                     Preferences.Set("access_token", jsonData.AccessToken);
                     Preferences.Set("refresh_token", jsonData.RefreshToken);
                     Preferences.Set("token_type", jsonData.TokenType);
-
-                    Console.WriteLine(Preferences.Get("access_token", null));
                 }
             }
             else
@@ -165,3 +163,4 @@ namespace TimeTracker.Apps.WebService
         }
     }
 }
+
