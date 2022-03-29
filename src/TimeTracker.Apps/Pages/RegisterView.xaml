@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -82,4 +83,90 @@
             
         </StackLayout>
     </ContentPage.Content>
+=======
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TimeTracker.Apps.ViewModels" 
+             x:DataType="viewmodels:RegisterViewModel"
+             x:Class="TimeTracker.Apps.Pages.RegisterView">
+    <ContentPage.Content>
+        <StackLayout 
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="CenterAndExpand"
+            Spacing="10">
+
+            <Label Text="Email"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   TextColor="Black"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   />
+
+            <Entry x:Name="login" 
+                Text="{Binding Login}"
+                Placeholder="E-mail" 
+                Keyboard="Email"           
+                VerticalOptions="Center"
+                HorizontalOptions="FillAndExpand"
+                Margin="50,0,50,0"
+                />
+
+            <Label Text="Prénom"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   TextColor="Black"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"/>
+
+            <Entry x:Name="firstName" 
+                   Placeholder="Prénom" 
+                   IsPassword="False"
+                   VerticalOptions="Center"
+                   HorizontalOptions="FillAndExpand"
+                   Margin="50,0,50,0"/>
+
+            <Label Text="Nom"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   TextColor="Black"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"/>
+
+            <Entry x:Name="LastName" 
+                   Placeholder="Nom" 
+                   IsPassword="False"
+                   VerticalOptions="Center"
+                   HorizontalOptions="FillAndExpand"
+                   Margin="50,0,50,0"/>
+
+            <Label Text="Mot de passe"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   TextColor="Black"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"/>
+
+            <Entry x:Name="password" 
+                   Placeholder="Mot de passe" 
+                   IsPassword="True"
+                   VerticalOptions="Center"
+                   HorizontalOptions="FillAndExpand"
+                   Margin="50,0,50,0"/>
+
+            <Button
+                Text="Inscription"
+                BackgroundColor="DarkBlue"
+                BorderWidth="1"
+                BorderColor="White"
+                CornerRadius="32"
+                TextColor="Black"
+                HorizontalOptions="CenterAndExpand"
+                Padding="30,15,30,15"
+                Command="{Binding InscriptionAccueil}"/>
+            
+        </StackLayout>
+    </ContentPage.Content>
+>>>>>>> 549ae6640f6c7f3396bc88107ba5ee93175ee9b4
 </ContentPage>
