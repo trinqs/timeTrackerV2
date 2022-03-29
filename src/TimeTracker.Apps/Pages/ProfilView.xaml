@@ -1,10 +1,85 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TimeTracker.Apps.ViewModels" 
+             x:DataType="viewmodels:ProfilViewModel"
              x:Class="TimeTracker.Apps.Pages.ProfilView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Vous etes dans le profil" />
+            <Grid ColumnDefinitions="*,*">
+                <Label Text="Nom :" 
+                       FontSize="20"
+                       TextColor="Black"
+                       Padding="10"
+                       HorizontalTextAlignment="Center"
+                       Grid.Column="0"
+                        Grid.Row="0"/>
+                <Label Text="{Binding Name}" 
+                       FontSize="20"
+                       TextColor="Black"
+                       Padding="10"
+                       HorizontalTextAlignment="Center"
+                       Grid.Column="1"
+                       Grid.Row="0"/>
+                
+                
+                <Label Text="Prenom :" 
+                       FontSize="20"
+                       TextColor="Black"
+                       Padding="10"
+                       HorizontalTextAlignment="Center"
+                       Grid.Column="0"
+                        Grid.Row="1"/>
+                <Label Text="{Binding Prenom}" 
+                       FontSize="20"
+                       TextColor="Black"
+                       Padding="10"
+                       HorizontalTextAlignment="Center"
+                       Grid.Column="1"
+                       Grid.Row="1"/>
+                
+                <Label Text="Email :" 
+                       FontSize="20"
+                       TextColor="Black"
+                       Padding="10"
+                       HorizontalTextAlignment="Center"
+                       Grid.Column="0"
+                        Grid.Row="2"/>
+                <Label Text="{Binding Email}" 
+                       FontSize="20"
+                       TextColor="Black"
+                       Padding="10"
+                       HorizontalTextAlignment="Center"
+                       Grid.Column="1"
+                       Grid.Row="2"/>
+                
+                <Label Text="Mot de passe :" 
+                       FontSize="20"
+                       TextColor="Black"
+                       Padding="10"
+                       HorizontalTextAlignment="Center"
+                       Grid.Column="0"
+                       Grid.Row="3"/>
+                <Label Text="{Binding Mdp}" 
+                       FontSize="20"
+                       TextColor="Black"
+                       Padding="10"
+                       HorizontalTextAlignment="Center"
+                       Grid.Column="1"
+                       Grid.Row="3"/>
+
+                <Button
+                    Text="Editer Profil"
+                    BackgroundColor="DarkBlue"
+                    CornerRadius="32"
+                    TextColor="White"
+                    HorizontalOptions="CenterAndExpand"
+                    Padding="30,15,30,15"
+                    Command="{Binding EditerProfil}"
+                    Grid.Row="4"
+                />
+            </Grid>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

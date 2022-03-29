@@ -5,16 +5,55 @@
              x:DataType="viewmodels:ProjetViewModel"
              x:Class="TimeTracker.Apps.Pages.ProjetView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Vous etes dans les projet !" />
-            <Button
-                Text="+"
-                BackgroundColor="DarkBlue"
-                CornerRadius="32"
-                TextColor="White"
-                HorizontalOptions="CenterAndExpand"
-                Padding="30,15,30,15"
-            />
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="12,0,12,48">
+            <StackLayout VerticalOptions="Start">
+                <Label Text="Création d'un nouveau projet" 
+                       HorizontalOptions="CenterAndExpand"
+                       Margin="0,10,0,0"
+                       TextColor="Black"
+                       FontAttributes="Bold"
+                       FontSize="Large"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical"  VerticalOptions="Center">
+                
+
+                <Entry Text="{Binding Text, Mode=TwoWay}"
+                       HorizontalOptions="FillAndExpand"
+                       HeightRequest="64"
+                       Placeholder="Entrer un titre"/>
+
+                <Editor Text="{Binding Description, Mode=TwoWay}" 
+                       AutoSize="TextChanges"
+                       Placeholder="Entrer une description"
+                        IsTextPredictionEnabled="False"
+                />
+                
+                <Editor Text="{Binding Description, Mode=TwoWay}" 
+                       AutoSize="TextChanges"
+                       Placeholder="Première tache"
+                        IsTextPredictionEnabled="False"
+                />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="End">
+                <Button
+                    Text="Ajouter"
+                    BackgroundColor="DarkBlue"
+                    CornerRadius="32"
+                    TextColor="White"
+                    HorizontalOptions="CenterAndExpand"
+                    Padding="50,15,50,15"
+                    Command="{Binding NouveauProjet}"
+                />
+            
+                <Button Text="Annuler"
+                    TextColor="White"
+                    BackgroundColor="DarkBlue"
+                    CornerRadius="32"
+                    Padding="50,15,50,15"
+                    HorizontalOptions="CenterAndExpand"
+                    Command="{Binding CancelCommand}"
+                />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
