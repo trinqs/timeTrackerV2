@@ -75,7 +75,7 @@
                 BorderWidth="1"
                 BorderColor="White"
                 CornerRadius="32"
-                TextColor="Black"
+                TextColor="White"
                 HorizontalOptions="CenterAndExpand"
                 Padding="30,15,30,15"
                 Command="{Binding InscriptionAccueil}"/>
