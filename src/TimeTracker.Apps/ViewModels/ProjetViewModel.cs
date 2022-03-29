@@ -16,6 +16,5 @@ namespace TimeTracker.Apps.ViewModels
 {
     internal class ProjetViewModel : ViewModelBase
     {
-       
     }
 }

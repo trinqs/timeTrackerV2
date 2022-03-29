@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TimeTracker.Apps.Pages.GraphiqueView"
+             xmlns:viewmodels="clr-namespace:TimeTracker.Apps.ViewModels" 
+             x:DataType="viewmodels:GraphiqueViewModel"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Voici un sublime graphique"
+                VerticalOptions="Center" 
+                Padding="0,20,0,20"
+                HorizontalOptions="CenterAndExpand" />
+            <forms:ChartView x:Name="ProjectChart" HeightRequest="250" Chart="{Binding PieChart}"  />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -67,6 +67,17 @@
                 HorizontalOptions="CenterAndExpand"
                 Padding="30,15,30,15"
                 Command="{Binding GoToInscription}"/>
+
+            <Button
+                Text="Graphique"
+                BackgroundColor="White"
+                BorderWidth="1"
+                BorderColor="Blue"
+                CornerRadius="32"
+                TextColor="Black"
+                HorizontalOptions="CenterAndExpand"
+                Padding="30,15,30,15"
+                Command="{Binding GraphTest}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
