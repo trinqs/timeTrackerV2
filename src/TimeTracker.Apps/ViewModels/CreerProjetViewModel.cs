@@ -1,10 +1,17 @@
-﻿using System;
+﻿using Storm.Mvvm;
+using Storm.Mvvm.Services;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
+using TimeTracker.Apps.Modele;
+using TimeTracker.Apps.Pages;
+using TimeTracker.Apps.WebService;
+using Xamarin.Forms;
 
 namespace TimeTracker.Apps.ViewModels
 {
-    internal class CreerProjetViewModel
+    internal class CreerProjetViewModel : ViewModelBase
     {
         private string _text;
         private string _description;
@@ -25,7 +32,7 @@ namespace TimeTracker.Apps.ViewModels
 
         public ICommand CancelCommand { get; }
 
-        public ProjetViewModel()
+        public CreerProjetViewModel()
         {
             NouveauProjet = new Command(NewProjet);
             CancelCommand = new Command(Cancel);

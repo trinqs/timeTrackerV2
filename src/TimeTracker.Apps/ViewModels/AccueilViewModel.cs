@@ -29,7 +29,8 @@ namespace TimeTracker.Apps.ViewModels
         {
             VoirProfil = new Command(GoToProfil);
             AjoutProjet = new Command(GoToProjet);
-            //creerJeuTest();
+            Projets = new ObservableCollection<Projet>();
+            creerJeuTest();
         }
 
         private void GoToProfil()
