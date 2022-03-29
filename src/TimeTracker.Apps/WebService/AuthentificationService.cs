@@ -42,11 +42,10 @@ namespace TimeTracker.Apps.WebService
             {
                 ClientId = CLIENT_ID,
                 ClientSecret = CLIENT_SECRET,
-                Email = "imis2@gmail.com",
+                Email = "imis@gmail.com",
                 FirstName = "test",
                 LastName = "test",
                 Password = "test",
-
             };
 
             var body = JsonConvert.SerializeObject(inscription);

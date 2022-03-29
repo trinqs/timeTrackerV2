@@ -2,7 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using TimeTracker.Apps.WebService;
+using TimeTracker.Dtos.Accounts;
 using Xamarin.Forms;
 
 namespace TimeTracker.Apps.ViewModels
@@ -10,27 +13,33 @@ namespace TimeTracker.Apps.ViewModels
     internal class ProfilViewModel : ViewModelBase
     {
 
-        private String _name;
-        private String _prenom;
-        private String _email;
+        private String _nameText;
+        private String _prenomText;
+        private String _emailText;
         private String _mdp;
 
-        public String Name 
+        private Boolean _readOnly;
+
+        private Boolean _visibilityChangerChamp;
+        private Boolean _visibilityEditerProfil;
+        private Boolean _visibilityEnregistrerProfil;
+
+        public String NameText 
         {
-            get => _name;
-            set => SetProperty(ref _name, value);
+            get => _nameText;
+            set => SetProperty(ref _nameText, value);
         }
 
-        public String Prenom
+        public String PrenomText
         {
-            get => _prenom;
-            set => SetProperty(ref _prenom, value);
+            get => _prenomText;
+            set => SetProperty(ref _prenomText, value);
         }
 
-        public string Email
+        public string EmailText
         {
-            get => _email;
-            set => SetProperty(ref _email, value);
+            get => _emailText;
+            set => SetProperty(ref _emailText, value);
         }
 
         public string Mdp
@@ -39,21 +48,87 @@ namespace TimeTracker.Apps.ViewModels
             set => SetProperty(ref _mdp, value);
         }
 
+        public Boolean ReadOnly
+        {
+            get => _readOnly;
+            set => SetProperty(ref _readOnly, value);
+        }
+
+        public Boolean VisibilityChangerChamp
+        {
+            get => _visibilityChangerChamp;
+            set => SetProperty(ref _visibilityChangerChamp, value);
+        }
+
+        public Boolean VisibilityEditerProfil
+        {
+            get => _visibilityEditerProfil;
+            set => SetProperty(ref _visibilityEditerProfil, value);
+        }
+
+        public Boolean VisibilityEnregistrerProfil
+        {
+            get => _visibilityEnregistrerProfil;
+            set => SetProperty(ref _visibilityEnregistrerProfil, value);
+
+        }
+
         public ICommand EditerProfil { get; }
+        public ICommand EnregistrerProfil { get; }
 
         public ProfilViewModel ()
         {
-            _name = "moi";
-            _prenom = "moi";
-            _email = "moi@moi";
-            _mdp = "***";
+
+            NameText = "Error";
+            PrenomText = "Error";
+            EmailText = "Error@Error";
+            Mdp = "***";
+
+            ChargerProfil();
+
+            ReadOnly = true;
+
+            VisibilityChangerChamp = false;
+            VisibilityEditerProfil = true;
+            VisibilityEnregistrerProfil = false;
 
             EditerProfil = new Command(ChangerProfil);
+            EnregistrerProfil = new Command(EnregistrerChangement);
         }
 
-        private void ChangerProfil ()
+        private async void ChargerProfil()
         {
+            UserProfileResponse _userInfo = await AccountService.GetProfil();
 
+            NameText = _userInfo.LastName;
+            PrenomText = _userInfo.FirstName;
+            EmailText = _userInfo.Email;
+
+        }
+
+        private async void EnregistrerChangement()
+        {
+            UserProfileResponse _userInfo = await AccountService.UpdateProfil(EmailText,PrenomText,NameText);
+
+            NameText = _userInfo.LastName;
+            PrenomText = _userInfo.FirstName;
+            EmailText = _userInfo.Email;
+
+            ReadOnly = true;
+
+            VisibilityChangerChamp = false;
+            VisibilityEditerProfil = true;
+            VisibilityEnregistrerProfil = false;
+        }
+
+        private async void ChangerProfil ()
+        {
+            ReadOnly = false;
+
+            VisibilityChangerChamp = true;
+            VisibilityEditerProfil = false;
+            VisibilityEnregistrerProfil = true;
+            
         }
     }
 }
