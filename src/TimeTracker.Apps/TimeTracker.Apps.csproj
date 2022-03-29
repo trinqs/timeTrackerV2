@@ -31,6 +31,9 @@
         <DependentUpon>MainPage.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Pages\ProjetView.xaml.cs">
+        <DependentUpon>ProjetView.xaml</DependentUpon>
+      </Compile>
       <Compile Update="Pages\RegisterView.xaml.cs">
         <DependentUpon>RegisterView.xaml</DependentUpon>
       </Compile>
@@ -41,6 +44,9 @@
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Pages\ConnexionView.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Pages\CreerProjetView.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Pages\ProfilView.xaml">
