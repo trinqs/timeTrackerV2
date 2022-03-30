@@ -1,5 +1,6 @@
 ﻿using Storm.Mvvm;
 using TimeTracker.Apps.Pages;
+using TimeTracker.Apps.WebService;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

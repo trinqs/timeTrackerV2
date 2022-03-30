@@ -56,19 +56,19 @@ namespace TimeTracker.Apps.WebService
         {
             HttpClient client = new HttpClient();
 
-            /*UserProfileResponse profil = new UserProfileResponse()
+            UserProfileResponse profil = new UserProfileResponse()
             {
                 Email = email,
                 FirstName = firstName,
                 LastName = lastName
-            };*/
+            };
 
-            UserProfileResponse profil = new UserProfileResponse()
+            /*UserProfileResponse profil = new UserProfileResponse()
             {
                 Email = "imis@gmail.com",
                 FirstName = "Julien",
                 LastName = "Chieze"
-            };
+            };*/
 
             var body = JsonConvert.SerializeObject(profil);
 
@@ -109,16 +109,9 @@ namespace TimeTracker.Apps.WebService
             return null;
         }
 
-        public static async Task<Boolean> SetPassword(String old_password, String new_password, String lastName)
+        public static async Task<Boolean> SetPassword(String old_password, String new_password)
         {
             HttpClient client = new HttpClient();
-
-            /*UserProfileResponse profil = new UserProfileResponse()
-            {
-                Email = email,
-                FirstName = firstName,
-                LastName = lastName
-            };*/
 
             SetPasswordRequest profil = new SetPasswordRequest()
             {
@@ -142,6 +135,7 @@ namespace TimeTracker.Apps.WebService
 
             if (response.IsSuccessStatusCode)
             {
+                Console.WriteLine("je suis la ");
                 return true;
             }
             else

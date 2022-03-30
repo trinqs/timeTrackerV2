@@ -1,9 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:TimeTracker.Apps.ViewModels" 
+             xmlns:viewmodels="clr-namespace:TimeTracker.Apps.ViewModels;assembly=TimeTracker.Apps" 
+             xmlns:model="clr-namespace:TimeTracker.Dtos.Projects;assembly=TimeTracker.Dtos"
              x:DataType="viewmodels:AccueilViewModel"
              x:Class="TimeTracker.Apps.Pages.AccueilView">
+
+    <ContentPage.Resources>
+        <DataTemplate x:DataType="model:ProjectItem" x:Key="ProjetsTemplate">
+            <ViewCell>
+                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                    <Grid ColumnDefinitions="*,*"
+                          HorizontalOptions="CenterAndExpand"
+                          VerticalOptions="CenterAndExpand">
+                        <Label Text="{Binding Name}"
+                               FontSize="32"
+                               LineBreakMode="WordWrap"
+                               TextColor="Black"
+                               Grid.Column="0"/>
+                        <Label Text="{Binding TotalSeconds}"
+                               FontSize="32"
+                               TextColor="Black"
+                               Grid.Column="1"/>
+                    </Grid>
+                </StackLayout>
+            </ViewCell>
+        </DataTemplate>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout 
           Orientation="Vertical"
@@ -38,74 +62,26 @@
                        TextColor="Black"
                        Padding="10,10,0,0"
                 />
-
             </Grid>
-            <!--<ListView x:Name="listProjets">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}"/>
-                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Description}"/>
-                                <Label Grid.Row="0" Grid.Column="2" Text="{Binding Total_seconds}"/>
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <Grid Margin="30" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <CollectionView x:Name="eventList" Grid.Row="1" ItemsLayout="VerticalList" ItemsSource="{Binding}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <ContentView>
-                                    <Frame HasShadow="True" CornerRadius="15" Margin="0,5" Padding="10" HeightRequest="100">
-                                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="*"/>
-                                            </Grid.RowDefinitions>
-                                            <Image Source="clock.png" Aspect="AspectFit" HorizontalOptions="End" Grid.RowSpan="2"/>
-                                            <StackLayout Orientation="Horizontal" Spacing="10">
-                                                <BoxView WidthRequest="12" HeightRequest="12" CornerRadius="6" BackgroundColor="#F8F8F8" VerticalOptions="Center"/>
-                                                <Label Text="{Binding EventTitle}" FontSize="12" TextColor="#F8F8F8"/>
-                                            </StackLayout>
 
-                                            <StackLayout Orientation="Horizontal" Grid.Row="1" HorizontalOptions="End" Margin="10" Spacing="15">
-                                                <StackLayout>
-                                                    <Label Text="{Binding Days}" FontSize="35" FontAttributes="Bold" TextColor="White" HorizontalOptions="End"/>
-                                                    <Label Text="DAYS" FontSize="10" TextColor="White" Opacity="0.5" HorizontalOptions="End" Margin="0,-5,0,0"/>
-                                                </StackLayout>
-                                                <StackLayout>
-                                                    <Label Text="{Binding Hours}" FontSize="35" FontAttributes="Bold" TextColor="White" HorizontalOptions="End"/>
-                                                    <Label Text="HOURS" FontSize="10" TextColor="White" Opacity="0.5" HorizontalOptions="End" Margin="0,-5,0,0"/>
-                                                </StackLayout>
-                                                <StackLayout>
-                                                    <Label Text="{Binding Minutes}" FontSize="35" FontAttributes="Bold" TextColor="White" HorizontalOptions="End"/>
-                                                    <Label Text="MINUTES" FontSize="10" TextColor="White" Opacity="0.5" HorizontalOptions="End" Margin="0,-5,0,0"/>
-                                                </StackLayout>
-                                                <StackLayout>
-                                                    <Label Text="{Binding Seconds}" FontSize="35" FontAttributes="Bold" TextColor="White" HorizontalOptions="End"/>
-                                                    <Label Text="SECONDS" FontSize="10" TextColor="White" Opacity="0.5" HorizontalOptions="End" Margin="0,-5,0,0"/>
-                                                </StackLayout>
-                                            </StackLayout>
-                                        </Grid>
-                                    </Frame>
-                                </ContentView>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </Grid>
-            </Grid>-->
+            <ListView ItemsSource="{Binding Projets}" 
+                      ItemTemplate="{StaticResource ProjetsTemplate}"
+                      Margin="10"
+                      HasUnevenRows="True"/>
+
+            <Label Text="Chrono"
+                HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="EndAndExpand"
+                  />
+
+            <Button Text="Timer"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="EndAndExpand"
+                        BackgroundColor="LightBlue"
+                        CornerRadius="32"
+                        HeightRequest="64"
+                        Command="{Binding AjoutProjet}"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

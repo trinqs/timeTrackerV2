@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using TimeTracker.Apps.Modele;
 using TimeTracker.Apps.Pages;
+using TimeTracker.Apps.WebService;
+using TimeTracker.Dtos.Projects;
 using Xamarin.Forms;
 
 namespace TimeTracker.Apps.ViewModels
@@ -18,8 +20,8 @@ namespace TimeTracker.Apps.ViewModels
         public ICommand VoirProfil { get; }
         public ICommand AjoutProjet { get; }
 
-        private ObservableCollection<Projet> _projets;
-        public ObservableCollection<Projet> Projets
+        private ObservableCollection<ProjectItem> _projets;
+        public ObservableCollection<ProjectItem> Projets
         {
             get => _projets;
             set => SetProperty(ref _projets, value);
@@ -29,7 +31,7 @@ namespace TimeTracker.Apps.ViewModels
         {
             VoirProfil = new Command(GoToProfil);
             AjoutProjet = new Command(GoToProjet);
-            Projets = new ObservableCollection<Projet>();
+            Projets = new ObservableCollection<ProjectItem>();
             creerJeuTest();
         }
 
@@ -45,11 +47,9 @@ namespace TimeTracker.Apps.ViewModels
             navigationService.PushAsync<ProjetView>();
         }
 
-        private void creerJeuTest()
+        private async void creerJeuTest()
         {
-            Projets.Add(new Projet(0, "Projet1", "Le projet 1", 0));
-            Projets.Add(new Projet(1, "Projet2", "Le projet 2", 0));
-            Projets.Add(new Projet(2, "Projet3", "Le projet 3", 0));
+            Projets = await ProjetService.GetAllProject();
         }
     }
 }
