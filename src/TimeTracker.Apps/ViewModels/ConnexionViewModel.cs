@@ -1,4 +1,6 @@
-﻿using Storm.Mvvm;
+﻿using Microcharts;
+using SkiaSharp;
+using Storm.Mvvm;
 using Storm.Mvvm.Services;
 using System;
 using System.Collections.Generic;
@@ -30,19 +32,6 @@ namespace TimeTracker.Apps.ViewModels
 		public ICommand ConnexionAcceuil { get; }
 
 		public ICommand GoToInscription { get; }
-
-		public ICommand GraphTest { get; }
-
-		public ConnexionViewModel()
-		{
-			ConnexionAcceuil = new Command(Connexion);
-			GoToInscription = new Command(Inscription);
-			GraphTest = new Command(async () =>
-		    {
-			    INavigationService navigationService = DependencyService.Get<INavigationService>();
-			    await navigationService.PushAsync<GraphiqueView>(null, NavigationMode.ReplaceAll);
-		    });
-		}
 
 		private async void Connexion()
 		{

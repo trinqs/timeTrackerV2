@@ -13,9 +13,8 @@ namespace TimeTracker.Apps.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GraphiqueView : ContentPage
     {
-        public GraphiqueView()
+        public GraphiqueView(List<ChartEntry> entries)
         {
-            List<ChartEntry> entries=null;
             InitializeComponent();
             BindingContext = new GraphiqueViewModel(entries);
         }
