@@ -7,6 +7,8 @@ using System.Windows.Input;
 using TimeTracker.Apps.WebService;
 using TimeTracker.Dtos.Accounts;
 using Xamarin.Forms;
+using Xamarin.CommunityToolkit.Extensions;
+using Xamarin.Essentials;
 
 namespace TimeTracker.Apps.ViewModels
 {
@@ -28,7 +30,7 @@ namespace TimeTracker.Apps.ViewModels
         private Boolean _visibilityEnregistrerMotDePasse;
         private Boolean _visibilityGridMotDePasse;
 
-        public String NameText 
+        public String NameText
         {
             get => _nameText;
             set => SetProperty(ref _nameText, value);
@@ -108,7 +110,7 @@ namespace TimeTracker.Apps.ViewModels
         public ICommand EngistrerMotDePasse { get; }
 
 
-        public ProfilViewModel ()
+        public ProfilViewModel()
         {
 
             NameText = "Error";
@@ -126,7 +128,7 @@ namespace TimeTracker.Apps.ViewModels
             VisibilityEnregistrerProfil = false;
             VisibilityModifierMotDePasse = true;
             VisibilityGridMotDePasse = false;
-            VisibilityEnregistrerMotDePasse= false;
+            VisibilityEnregistrerMotDePasse = false;
 
             EditerProfil = new Command(ChangerProfil);
             EnregistrerProfil = new Command(EnregistrerChangementProfil);
@@ -146,29 +148,43 @@ namespace TimeTracker.Apps.ViewModels
 
         private async void EnregistrerChangementProfil()
         {
-            UserProfileResponse _userInfo = await AccountService.UpdateProfil(EmailText,PrenomText,NameText);
+            String token = Preferences.Get("access_token", null);
+            UserProfileResponse _userInfo = null;
 
-            NameText = _userInfo.LastName;
-            PrenomText = _userInfo.FirstName;
-            EmailText = _userInfo.Email;
+            if (EmailText.Contains("@") & PrenomText != "" & NameText != "")
+            {
+                _userInfo = await AccountService.UpdateProfil(EmailText, PrenomText, NameText);
+            }
 
-            ReadOnly = true;
+            if (_userInfo != null)
+            {
+                ReadOnly = true;
 
-            VisibilityChangerChamp = false;
-            VisibilityEditerProfil = true;
-            VisibilityEnregistrerProfil = false;
+                VisibilityChangerChamp = false;
+                VisibilityEditerProfil = true;
+                VisibilityEnregistrerProfil = false;
+                await App.Current.MainPage.DisplayToastAsync("Enregistrement Effectué", 1000);
+                ChargerProfil();
+            }
+            else if (token != Preferences.Get("access_token", null))
+            {
+                EnregistrerChangementProfil();
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayToastAsync("Un problème est survenu, assuré vous que vous avez tout bien remplie correctement", 1000);
+            }
 
-            ChargerProfil();
         }
 
-        private void ChangerProfil ()
+        private void ChangerProfil()
         {
             ReadOnly = false;
 
             VisibilityChangerChamp = true;
             VisibilityEditerProfil = false;
             VisibilityEnregistrerProfil = true;
-            
+
         }
         private void ChangerMotDePasse(object obj)
         {
@@ -179,12 +195,33 @@ namespace TimeTracker.Apps.ViewModels
 
         private async void EnregistrerChangementMotDePasse(object obj)
         {
-            bool _userInfo = await AccountService.SetPassword(AncientMotDePasse, NouveauMotDePasse);
-            VisibilityModifierMotDePasse = true;
-            VisibilityGridMotDePasse = false;
-            VisibilityEnregistrerMotDePasse = false;
+            String token = Preferences.Get("access_token", null);
+            bool _userInfo = false;
+
+            if (AncientMotDePasse != NouveauMotDePasse & NouveauMotDePasse.Length >= 6 & AncientMotDePasse != "")
+            {
+                _userInfo = await AccountService.SetPassword(AncientMotDePasse, NouveauMotDePasse);
+            }
+
+            if (_userInfo != false)
+            {
+                VisibilityModifierMotDePasse = true;
+                VisibilityGridMotDePasse = false;
+                VisibilityEnregistrerMotDePasse = false;
+
+                await App.Current.MainPage.DisplayToastAsync("Enregistrement Effectué", 1000);
+            }
+            else if (token != Preferences.Get("access_token", null))
+            {
+                EnregistrerChangementProfil();
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayToastAsync("Un problème est survenu, assuré vous que vous avez tout bien remplie correctement", 1000);
+            }
+
         }
 
-       
+
     }
 }
