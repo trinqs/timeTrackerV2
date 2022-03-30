@@ -11,6 +11,7 @@
 
     <ItemGroup>
       <None Remove="Pages\ProjetView.xaml~RFef4cae.TMP" />
+      <None Remove="WebService\AccountService.cs~RFdd101a.TMP" />
     </ItemGroup>
 
     <ItemGroup>

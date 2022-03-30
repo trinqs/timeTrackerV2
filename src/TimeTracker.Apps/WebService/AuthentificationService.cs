@@ -45,7 +45,7 @@ namespace TimeTracker.Apps.WebService
                 Email = "imis@gmail.com",
                 FirstName = "test",
                 LastName = "test",
-                Password = "test",
+                Password = "cours2022",
             };
 
             var body = JsonConvert.SerializeObject(inscription);

@@ -16,13 +16,17 @@ namespace TimeTracker.Apps.ViewModels
         private String _nameText;
         private String _prenomText;
         private String _emailText;
-        private String _mdp;
+        private String _ancientMotDePasse;
+        private String _nouveauMotDePasse;
 
         private Boolean _readOnly;
 
         private Boolean _visibilityChangerChamp;
         private Boolean _visibilityEditerProfil;
         private Boolean _visibilityEnregistrerProfil;
+        private Boolean _visibilityModifierMotDePasse;
+        private Boolean _visibilityEnregistrerMotDePasse;
+        private Boolean _visibilityGridMotDePasse;
 
         public String NameText 
         {
@@ -42,11 +46,18 @@ namespace TimeTracker.Apps.ViewModels
             set => SetProperty(ref _emailText, value);
         }
 
-        public string Mdp
+        public string AncientMotDePasse
         {
-            get => _mdp;
-            set => SetProperty(ref _mdp, value);
+            get => _ancientMotDePasse;
+            set => SetProperty(ref _ancientMotDePasse, value);
         }
+
+        public string NouveauMotDePasse
+        {
+            get => _nouveauMotDePasse;
+            set => SetProperty(ref _nouveauMotDePasse, value);
+        }
+
 
         public Boolean ReadOnly
         {
@@ -73,8 +84,29 @@ namespace TimeTracker.Apps.ViewModels
 
         }
 
+        public Boolean VisibilityModifierMotDePasse
+        {
+            get => _visibilityModifierMotDePasse;
+            set => SetProperty(ref _visibilityModifierMotDePasse, value);
+        }
+
+        public Boolean VisibilityEnregistrerMotDePasse
+        {
+            get => _visibilityEnregistrerMotDePasse;
+            set => SetProperty(ref _visibilityEnregistrerMotDePasse, value);
+        }
+
+        public Boolean VisibilityGridMotDePasse
+        {
+            get => _visibilityGridMotDePasse;
+            set => SetProperty(ref _visibilityGridMotDePasse, value);
+        }
+
         public ICommand EditerProfil { get; }
         public ICommand EnregistrerProfil { get; }
+        public ICommand EditerMotDePasse { get; }
+        public ICommand EngistrerMotDePasse { get; }
+
 
         public ProfilViewModel ()
         {
@@ -82,7 +114,8 @@ namespace TimeTracker.Apps.ViewModels
             NameText = "Error";
             PrenomText = "Error";
             EmailText = "Error@Error";
-            Mdp = "***";
+            AncientMotDePasse = "";
+            NouveauMotDePasse = "";
 
             ChargerProfil();
 
@@ -91,9 +124,14 @@ namespace TimeTracker.Apps.ViewModels
             VisibilityChangerChamp = false;
             VisibilityEditerProfil = true;
             VisibilityEnregistrerProfil = false;
+            VisibilityModifierMotDePasse = true;
+            VisibilityGridMotDePasse = false;
+            VisibilityEnregistrerMotDePasse= false;
 
             EditerProfil = new Command(ChangerProfil);
-            EnregistrerProfil = new Command(EnregistrerChangement);
+            EnregistrerProfil = new Command(EnregistrerChangementProfil);
+            EditerMotDePasse = new Command(ChangerMotDePasse);
+            EngistrerMotDePasse = new Command(EnregistrerChangementMotDePasse);
         }
 
         private async void ChargerProfil()
@@ -106,7 +144,7 @@ namespace TimeTracker.Apps.ViewModels
 
         }
 
-        private async void EnregistrerChangement()
+        private async void EnregistrerChangementProfil()
         {
             UserProfileResponse _userInfo = await AccountService.UpdateProfil(EmailText,PrenomText,NameText);
 
@@ -119,9 +157,11 @@ namespace TimeTracker.Apps.ViewModels
             VisibilityChangerChamp = false;
             VisibilityEditerProfil = true;
             VisibilityEnregistrerProfil = false;
+
+            ChargerProfil();
         }
 
-        private async void ChangerProfil ()
+        private void ChangerProfil ()
         {
             ReadOnly = false;
 
@@ -130,5 +170,21 @@ namespace TimeTracker.Apps.ViewModels
             VisibilityEnregistrerProfil = true;
             
         }
+        private void ChangerMotDePasse(object obj)
+        {
+            VisibilityModifierMotDePasse = false;
+            VisibilityGridMotDePasse = true;
+            VisibilityEnregistrerMotDePasse = true;
+        }
+
+        private async void EnregistrerChangementMotDePasse(object obj)
+        {
+            bool _userInfo = await AccountService.SetPassword(AncientMotDePasse, NouveauMotDePasse);
+            VisibilityModifierMotDePasse = true;
+            VisibilityGridMotDePasse = false;
+            VisibilityEnregistrerMotDePasse = false;
+        }
+
+       
     }
 }

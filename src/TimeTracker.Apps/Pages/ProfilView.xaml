@@ -87,6 +87,60 @@
                 IsVisible="{Binding VisibilityEnregistrerProfil}"
                 Command="{Binding EnregistrerProfil}"/>
 
+            <Button
+                Text="Modifier mot de passe"
+                BackgroundColor="DarkBlue"
+                CornerRadius="32"
+                TextColor="White"
+                Margin="10,30,10,0"
+                IsVisible="{Binding VisibilityModifierMotDePasse}"
+                Command="{Binding EditerMotDePasse}"/>
+
+            <Grid ColumnDefinitions="*,*"
+                  IsVisible="{Binding VisibilityGridMotDePasse}">
+            <Label Text="Ancien mot de passe :" 
+                       FontSize="20"
+                       TextColor="Black"
+                       Padding="10"
+                       HorizontalTextAlignment="Center"
+                       Grid.Column="0"
+                        Grid.Row="0"/>
+            <Entry x:Name="AncientMotDePasse"
+                       Text="{Binding AncientMotDePasse}" 
+                       IsPassword="True"
+                       FontSize="20"
+                       TextColor="Black"
+                       HorizontalTextAlignment="Center"
+                       Grid.Column="1"
+                       Grid.Row="0"/>
+
+            <Label Text="Nouveau mot de passe :" 
+                    FontSize="20"
+                    TextColor="Black"
+                    Padding="10"
+                    HorizontalTextAlignment="Center"
+                    Grid.Column="0"
+                    Grid.Row="1"/>
+            <Entry x:Name="NouveauMotDePasse"
+                    Text="{Binding NouveauMotDePasse}" 
+                    IsPassword="True"
+                    FontSize="20"
+                    TextColor="Black"
+                    HorizontalTextAlignment="Center"
+                    Grid.Column="1"
+                    Grid.Row="1"/>
+            </Grid>
+
+            <Button
+                Text="Enregistrer mot de passe"
+                BackgroundColor="DarkBlue"
+                CornerRadius="32"
+                TextColor="White"
+                Margin="10,30,10,0"
+                IsVisible="{Binding VisibilityEnregistrerMotDePasse}"
+                Command="{Binding EngistrerMotDePasse}"/>
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
