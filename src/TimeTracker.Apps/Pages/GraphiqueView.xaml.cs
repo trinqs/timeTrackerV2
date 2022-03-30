@@ -43,5 +43,4 @@ namespace TimeTracker.Apps.Pages
             BindingContext = new GraphiqueViewModel(entries);
         }
     }
->>>>>>> 1a9b145329a041e8af9594502a2fa431d7782cd8
 }
