@@ -24,7 +24,7 @@ namespace TimeTracker.Apps.WebService
 
         public AuthentificationService() { }
 
-        public static async Task Inscription(String email, string firstName, string lastName, string password)
+        public static async Task<Boolean> Inscription(String email, string firstName, string lastName, string password)
         {
             HttpClient client = new HttpClient();
             /*CreateUserRequest inscription = new CreateUserRequest()
@@ -45,7 +45,7 @@ namespace TimeTracker.Apps.WebService
                 Email = "imis@gmail.com",
                 FirstName = "test",
                 LastName = "test",
-                Password = "cours2022",
+                Password = "cours20221",
             };
 
             var body = JsonConvert.SerializeObject(inscription);
@@ -71,15 +71,18 @@ namespace TimeTracker.Apps.WebService
                     Preferences.Set("access_token", jsonData.AccessToken);
                     Preferences.Set("refresh_token", jsonData.RefreshToken);
                     Preferences.Set("token_type", jsonData.TokenType);
+
+                    return true;
                 }
             }
             else
             {
                 Console.WriteLine("Inscription fonctionne pas");
             }
+            return false;
         }
 
-        public static async Task Connexion(String loginRequete, String passwordRequete)
+        public static async Task<Boolean> Connexion(String loginRequete, String passwordRequete)
         {
             HttpClient client = new HttpClient();
             LoginWithCredentialsRequest login = new LoginWithCredentialsRequest()
@@ -112,12 +115,16 @@ namespace TimeTracker.Apps.WebService
                     Preferences.Set("access_token", jsonData.AccessToken);
                     Preferences.Set("refresh_token", jsonData.RefreshToken);
                     Preferences.Set("token_type", jsonData.TokenType);
+
+                    return true;
                 }
             }
             else
             {
                 Console.WriteLine("Login fonctionne pas");
             }
+
+            return false;
         }
 
         public static async Task Refresh()
