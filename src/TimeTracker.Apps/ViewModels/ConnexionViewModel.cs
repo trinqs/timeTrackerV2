@@ -33,6 +33,15 @@ namespace TimeTracker.Apps.ViewModels
 
 		public ICommand GoToInscription { get; }
 
+
+
+		public ConnexionViewModel()
+		{
+			ConnexionAcceuil = new Command(Connexion);
+			GoToInscription = new Command(Inscription);
+
+		}
+
 		private async void Connexion()
 		{
 			await AuthentificationService.Connexion(Login, Password);
