@@ -6,6 +6,7 @@ using Storm.Mvvm;
 using Storm.Mvvm.Services;
 using TimeTracker.Apps.Pages;
 using TimeTracker.Apps.WebService;
+using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
 
 namespace TimeTracker.Apps.ViewModels
@@ -47,27 +48,46 @@ namespace TimeTracker.Apps.ViewModels
         public RegisterViewModel()
         {
             InscriptionAccueil = new Command(Inscription);
+            Login = "";
+            Password = "";
+            FirstName = "";
+            LastName = "";
+            
         }
 
         private async void Inscription()
         {
-            try
-            {
-                //await AuthentificationService.Inscription(Login, FirstName, LastName, Password);
-                INavigationService navigationService = DependencyService.Get<INavigationService>();
-                await navigationService.PushAsync<AccueilView>(null, NavigationMode.ReplaceAll);
+            String InscriptionReussite ="";
+
+            Console.WriteLine(Login);
+            Console.WriteLine(Password);
+            Console.WriteLine(FirstName);
+            Console.WriteLine(LastName);
+
+            if (Login.Contains("@") & Password != "" & FirstName != "" & LastName != "") {
+                InscriptionReussite = await AuthentificationService.Inscription(Login, FirstName, LastName, Password);
             }
-            catch (Exception ex)
+
+            if (InscriptionReussite == "ok")
             {
-                Console.WriteLine(ex.Message);
-                if (ex.InnerException != null)
+                try
                 {
-                    Console.WriteLine("Inner exception: {0}", ex.InnerException);
+
+                    INavigationService navigationService = DependencyService.Get<INavigationService>();
+                    await navigationService.PushAsync<AccueilView>(null, NavigationMode.ReplaceAll);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    if (ex.InnerException != null)
+                    {
+                        Console.WriteLine("Inner exception: {0}", ex.InnerException);
+                    }
                 }
             }
-
+            else{
+                await App.Current.MainPage.DisplayToastAsync("Echec de l'inscription On sait pas pourquoi", 2000);
+            }
         }
-
-
     }
 }
