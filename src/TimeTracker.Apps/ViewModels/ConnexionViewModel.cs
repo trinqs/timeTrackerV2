@@ -9,6 +9,7 @@ using System.Windows.Input;
 using TimeTracker.Apps.Pages;
 using TimeTracker.Apps.WebService;
 using Xamarin.Forms;
+using Xamarin.CommunityToolkit.Extensions;
 
 namespace TimeTracker.Apps.ViewModels
 {
@@ -37,33 +38,46 @@ namespace TimeTracker.Apps.ViewModels
 
 		public ConnexionViewModel()
 		{
+			Login = "";
+			Password = "";
+
 			ConnexionAcceuil = new Command(Connexion);
-			GoToInscription = new Command(Inscription);
+			GoToInscription = new Command(InscriptionNavigation);
 
 		}
 
 		private async void Connexion()
 		{
-			await AuthentificationService.Connexion(Login, Password);
-
-			
-			try
+			Boolean connectionReussite = false;
+			if ( Password!="" & Login.Contains("@"))
 			{
-				INavigationService navigationService = DependencyService.Get<INavigationService>();
-				await navigationService.PushAsync<AccueilView>(null, NavigationMode.ReplaceAll);
+				connectionReussite = await AuthentificationService.Connexion(Login, Password);
 			}
-			catch (Exception ex)
+
+			if (connectionReussite)
 			{
-				Console.WriteLine(ex.Message);
-				if (ex.InnerException != null)
+				Console.WriteLine(connectionReussite.ToString());
+				try
 				{
-					Console.WriteLine("Inner exception: {0}", ex.InnerException);
+					INavigationService navigationService = DependencyService.Get<INavigationService>();
+					await navigationService.PushAsync<AccueilView>(null, NavigationMode.ReplaceAll);
+				}
+				catch (Exception ex)
+				{	
+					Console.WriteLine(ex.Message);
+					if (ex.InnerException != null)
+					{
+						Console.WriteLine("Inner exception: {0}", ex.InnerException);
+					}
 				}
 			}
-
+            else
+            {
+				await App.Current.MainPage.DisplayToastAsync("Echec de la connexion, vérifier les champs remplies et réessayer", 1000);
+			}
 		}
 
-		private async void Inscription()
+		private async void InscriptionNavigation()
 		{
 			try
 			{
@@ -72,6 +86,7 @@ namespace TimeTracker.Apps.ViewModels
 			}
 			catch (Exception ex)
 			{
+				await App.Current.MainPage.DisplayToastAsync("Echec de l'inscription, veuillez", 1000);
 				Console.WriteLine(ex.Message);
 				if (ex.InnerException != null)
 				{
