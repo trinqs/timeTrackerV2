@@ -86,7 +86,6 @@ namespace TimeTracker.Apps.ViewModels
 			}
 			catch (Exception ex)
 			{
-				await App.Current.MainPage.DisplayToastAsync("Echec de l'inscription, veuillez", 1000);
 				Console.WriteLine(ex.Message);
 				if (ex.InnerException != null)
 				{
