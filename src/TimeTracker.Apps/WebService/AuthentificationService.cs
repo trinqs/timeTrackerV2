@@ -86,7 +86,7 @@ namespace TimeTracker.Apps.WebService
             {
                 ClientId = CLIENT_ID,
                 ClientSecret = CLIENT_SECRET,
-                Password = "test",
+                Password = "cours2021",
                 Login = "imis@gmail.com"
             };
 

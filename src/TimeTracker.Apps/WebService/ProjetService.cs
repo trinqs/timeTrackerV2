@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace TimeTracker.Apps.WebService
 {
     internal class ProjetService
     {
-        public static async Task<List<ProjectItem>> GetAllProject()
+        public static async Task<ObservableCollection<ProjectItem>> GetAllProject()
         {
             HttpClient client = new HttpClient();
 
@@ -32,7 +33,8 @@ namespace TimeTracker.Apps.WebService
                 JObject data = JObject.Parse(response.Content.ReadAsStringAsync().Result);
                 if (data.GetValue("is_success").ToString() == "True")
                 {
-                    List<ProjectItem> jsonData = JsonConvert.DeserializeObject<List<ProjectItem>>(data.GetValue("data").ToString());
+                    Console.WriteLine("salut salut");
+                    ObservableCollection<ProjectItem> jsonData = JsonConvert.DeserializeObject<ObservableCollection<ProjectItem>>(data.GetValue("data").ToString());
                     return jsonData;
                 }
             }
