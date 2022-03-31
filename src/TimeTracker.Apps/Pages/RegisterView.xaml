@@ -34,7 +34,8 @@
                    VerticalOptions="Center"
                    HorizontalOptions="Center"/>
 
-            <Entry x:Name="firstName" 
+            <Entry x:Name="firstName"
+                   Text="{Binding FirstName}"
                    Placeholder="Prénom" 
                    IsPassword="False"
                    VerticalOptions="Center"
@@ -49,6 +50,7 @@
                    HorizontalOptions="Center"/>
 
             <Entry x:Name="LastName" 
+                   Text="{Binding LastName}"
                    Placeholder="Nom" 
                    IsPassword="False"
                    VerticalOptions="Center"
@@ -63,6 +65,7 @@
                    HorizontalOptions="Center"/>
 
             <Entry x:Name="password" 
+                   Text="{Binding Password}"
                    Placeholder="Mot de passe" 
                    IsPassword="True"
                    VerticalOptions="Center"
