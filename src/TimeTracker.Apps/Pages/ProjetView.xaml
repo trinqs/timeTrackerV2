@@ -20,7 +20,7 @@
                                    TextColor="#F8F8F8"
                                    Grid.Column="0"
                                    Grid.Row="0"/>
-                            <Label Text="{Binding Times}"
+                            <Label Text="{Binding Times.Count}"
                                    FontSize="32"
                                    TextColor="Black"
                                    Grid.Column="1"
