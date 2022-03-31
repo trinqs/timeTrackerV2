@@ -32,16 +32,6 @@ namespace TimeTracker.Apps.ViewModels
         public ICommand StartTimer { get; }
         public ICommand StopTimer { get; }
 
-
-
-        private EventHandler _selectedItem;
-
-        public EventHandler SelectedItem
-        {
-            get => _selectedItem;
-            set => SetProperty(ref _selectedItem, null);
-        }
-
         private ObservableCollection<ProjectItem> _projets;
         public ObservableCollection<ProjectItem> Projets
         {
@@ -59,7 +49,7 @@ namespace TimeTracker.Apps.ViewModels
             Seconds = stopwatch.Elapsed.Seconds.ToString();
 
             Projets = new ObservableCollection<ProjectItem>();
-            creerJeuTest();
+            getProjets();
         }
 
         private void GoToProfil()
@@ -84,7 +74,7 @@ namespace TimeTracker.Apps.ViewModels
             fin = DateTime.Today;
         }
 
-        private async void creerJeuTest()
+        private async void getProjets()
         {
             Projets = await ProjetService.GetAllProject();
         }

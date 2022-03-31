@@ -10,7 +10,7 @@
         <DataTemplate x:DataType="model:ProjectItem" x:Key="ProjetsTemplate">
             <ViewCell>
                 <Frame HasShadow="False" CornerRadius="15" Margin="0,5" Padding="10" BackgroundColor="RosyBrown">
-                    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" >
+                    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
                         <Grid ColumnDefinitions="*,*"
                               HorizontalOptions="CenterAndExpand"
                               VerticalOptions="CenterAndExpand" >
@@ -83,13 +83,15 @@
                        Padding="10,10,0,0"
                 />
             </Grid>
-            
+
             <ListView ItemsSource="{Binding Projets}" 
                       ItemTemplate="{StaticResource ProjetsTemplate}"
                       Margin="10"
                       HasUnevenRows="True"
-                      ItemSelected="ListView_OnItemSelected"
-                      ItemTapped="ItemTapped"/>
+                      SelectionMode="None"
+                      x:name ="ProjetList"
+                      ItemTapped="ItemTapped"
+                      />
 
             <Label Text="{Binding Seconds}"
                    TextColor="Black"
