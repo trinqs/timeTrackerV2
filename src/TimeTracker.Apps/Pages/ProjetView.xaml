@@ -2,14 +2,51 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:TimeTracker.Apps.ViewModels" 
+             xmlns:model="clr-namespace:TimeTracker.Dtos.Projects;assembly=TimeTracker.Dtos"
              x:DataType="viewmodels:ProjetViewModel"
              x:Class="TimeTracker.Apps.Pages.ProjetView">
+
+    <ContentPage.Resources>
+        <DataTemplate x:DataType="model:TaskItem" x:Key="TacheTemplate">
+            <ViewCell>
+                <Frame HasShadow="False" CornerRadius="15" Margin="0,5" Padding="10" BackgroundColor="RosyBrown">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" >
+                        <Grid ColumnDefinitions="*,*"
+                              HorizontalOptions="CenterAndExpand"
+                              VerticalOptions="CenterAndExpand" >
+                            <Label Text="{Binding Name}"
+                                   FontSize="32"
+                                   LineBreakMode="WordWrap"
+                                   TextColor="#F8F8F8"
+                                   Grid.Column="0"
+                                   Grid.Row="0"/>
+                            <Label Text="{Binding Times}"
+                                   FontSize="32"
+                                   TextColor="Black"
+                                   Grid.Column="1"
+                                   Grid.Row="0"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </ViewCell>
+        </DataTemplate>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="12,0,12,48">
+            <Label Text="CA ENVOIT PAS LES INFOS"
+                   FontAttributes="Bold"/>
             <Label Text="nom"/>
             <Label Text="description"/>
             <Label Text="Temps"/>
+            
             <Label Text="Taches :"/>
+            <ListView ItemsSource="{Binding Taches}" 
+                      ItemTemplate="{StaticResource TacheTemplate}"
+                      Margin="10"
+                      HasUnevenRows="True"
+                      ItemSelected="ListView_OnItemSelected" />
+            
             <Grid ColumnDefinitions="*,*">
                 <Button Text="Editer"
                         Grid.Column="0"

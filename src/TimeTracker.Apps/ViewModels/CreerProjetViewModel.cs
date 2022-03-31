@@ -7,6 +7,9 @@ using System.Windows.Input;
 using TimeTracker.Apps.Modele;
 using TimeTracker.Apps.Pages;
 using TimeTracker.Apps.WebService;
+using TimeTracker.Dtos.Projects;
+using Xamarin.CommunityToolkit.Extensions;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace TimeTracker.Apps.ViewModels
@@ -34,25 +37,37 @@ namespace TimeTracker.Apps.ViewModels
 
         public CreerProjetViewModel()
         {
+            Text = "a";
+            Description = "b";
             NouveauProjet = new Command(NewProjet);
             CancelCommand = new Command(Cancel);
         }
 
-        private void NewProjet()
+        private async void  NewProjet()
         {
-            string text = Text;
-            if (string.IsNullOrEmpty(text))
+            String token= Preferences.Get("access_token",null);
+            ProjectItem projet= null;
+
+            if(Text!="" & Description != "")
             {
-                return;
+                projet = await ProjetService.AddProject(Text, Description);
             }
 
-            var projetService = DependencyService.Get<ProjetService>();
-            //projetService.AddProject(Text, Description);
-            //projetService.addProjet(Text, Description);
 
-            new Projet(0, _text, _description, 0);
-            INavigationService navigationService = DependencyService.Get<INavigationService>();
-            navigationService.PushAsync<AccueilView>();
+            if (projet != null)
+            {
+                await App.Current.MainPage.DisplayToastAsync("Projet enregistrée", 1000);
+                INavigationService navigationService = DependencyService.Get<INavigationService>();
+                await navigationService.PushAsync<AccueilView>();
+            }
+            else if(token!= Preferences.Get("access_token", null))
+            {
+                NewProjet();
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayToastAsync("Echec de l'enregistrement, veuillez vérifier que tout les champs sont bien remplies correctement", 1000);
+            }
         }
 
         private void Cancel()

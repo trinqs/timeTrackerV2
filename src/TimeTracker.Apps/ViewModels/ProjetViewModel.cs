@@ -16,6 +16,15 @@ namespace TimeTracker.Apps.ViewModels
 {
     internal class ProjetViewModel : ViewModelBase
     {
+
+        private ObservableCollection<TaskItem> _taches;
+
+        public ObservableCollection<TaskItem> Taches
+        {
+            get => _taches;
+            set => SetProperty(ref _taches, value);
+        }
+
         public ICommand Edit { get; }
         public ICommand Supp { get; }
 
@@ -23,6 +32,9 @@ namespace TimeTracker.Apps.ViewModels
         {
             Edit = new Command(EditerProjet);
             Supp = new Command(SupprimerProjet);
+
+            Taches = new ObservableCollection<TaskItem>();
+            afficherTache();
         }
 
         private void EditerProjet()
@@ -30,6 +42,11 @@ namespace TimeTracker.Apps.ViewModels
         }
         private void SupprimerProjet()
         {
+        }
+
+        private async void afficherTache()
+        {
+            Taches = await TaskService.GetAllTask(165); // A CHANGER
         }
     }
 }

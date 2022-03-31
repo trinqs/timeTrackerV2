@@ -12,7 +12,7 @@ namespace TimeTracker.Apps.WebService
 {
     internal class TimeService
     {
-        public static async Task<TimeItem> UpdateProfil(int projectId, int taskId, DateTime startTime, DateTime endTime)
+        public static async Task<TimeItem> AddProfil(int projectId, int taskId, DateTime startTime, DateTime endTime)
         {
             HttpClient client = new HttpClient();
 
@@ -26,7 +26,7 @@ namespace TimeTracker.Apps.WebService
 
             var resquest = new HttpRequestMessage()
             {
-                RequestUri = new Uri(Dtos.Urls.HOST + "/" + Dtos.Urls.ADD_TIME),
+                RequestUri = new Uri(Dtos.Urls.HOST + "/api/v1/projects/" + projectId.ToString() + "/tasks" + taskId.ToString()+"/times"),
                 Method = HttpMethod.Post,
                 Content = new StringContent(body, Encoding.UTF8, "application/json")
             };
@@ -75,7 +75,7 @@ namespace TimeTracker.Apps.WebService
 
             var resquest = new HttpRequestMessage()
             {
-                RequestUri = new Uri(Dtos.Urls.HOST + "/" + Dtos.Urls.UPDATE_TIME),
+                RequestUri = new Uri(Dtos.Urls.HOST + "/api/v1/projects/" + projectId.ToString() + "/tasks" + taskId.ToString() + "/times"+timeId.ToString()),
                 Method = HttpMethod.Put,
                 Content = new StringContent(body, Encoding.UTF8, "application/json")
             };
@@ -116,7 +116,7 @@ namespace TimeTracker.Apps.WebService
 
             HttpRequestMessage resquest = new HttpRequestMessage()
             {
-                RequestUri = new Uri(Dtos.Urls.HOST + "/" + Dtos.Urls.DELETE_TIME),
+                RequestUri = new Uri(Dtos.Urls.HOST + "/api/v1/projects/" + projectId.ToString() + "/tasks" + taskId.ToString() + "/times" + timeId.ToString()),
                 Method = HttpMethod.Delete
             };
 

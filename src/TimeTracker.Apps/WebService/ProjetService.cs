@@ -72,7 +72,7 @@ namespace TimeTracker.Apps.WebService
 
             ProjectItem projet = new ProjectItem()
             {
-                Name = "projet 1",
+                Name = "projet Test",
                 Description = "C'est la descripton"
             };
 
