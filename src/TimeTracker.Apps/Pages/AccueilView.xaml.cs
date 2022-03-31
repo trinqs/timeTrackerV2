@@ -22,8 +22,6 @@ namespace TimeTracker.Apps.Pages
         {
             //var item = e.Item as Projets;
             await Navigation.PushAsync(new ProjetView((Dtos.Projects.ProjectItem)e.Item));
-
-
         }
     }
 }
