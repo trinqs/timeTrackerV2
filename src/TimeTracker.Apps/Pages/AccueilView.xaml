@@ -9,25 +9,45 @@
     <ContentPage.Resources>
         <DataTemplate x:DataType="model:ProjectItem" x:Key="ProjetsTemplate">
             <ViewCell>
-                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
-                    <Grid ColumnDefinitions="*,*"
-                          HorizontalOptions="CenterAndExpand"
-                          VerticalOptions="CenterAndExpand">
-                        <Label Text="{Binding Name}"
-                               FontSize="32"
-                               LineBreakMode="WordWrap"
-                               TextColor="Black"
-                               Grid.Column="0"/>
-                        <Label Text="{Binding TotalSeconds}"
-                               FontSize="32"
-                               TextColor="Black"
-                               Grid.Column="1"/>
-                    </Grid>
-                </StackLayout>
+                <Frame HasShadow="False" CornerRadius="15" Margin="0,5" Padding="10" BackgroundColor="RosyBrown">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" >
+                        <Grid ColumnDefinitions="*,*"
+                              HorizontalOptions="CenterAndExpand"
+                              VerticalOptions="CenterAndExpand" >
+                            <Label Text="{Binding Name}"
+                                   FontSize="32"
+                                   LineBreakMode="WordWrap"
+                                   TextColor="#F8F8F8"
+                                   Grid.Column="0"
+                                   Grid.Row="0"/>
+                            <Label Text="{Binding TotalSeconds}"
+                                   FontSize="32"
+                                   TextColor="Black"
+                                   Grid.Column="1"
+                                   Grid.Row="0"/>
+                        </Grid>
+                        <Label Text="{Binding Description}"
+                                   FontSize="20"
+                                   TextColor="Black"
+                                   />
+                    </StackLayout>
+                </Frame>
             </ViewCell>
         </DataTemplate>
-    </ContentPage.Resources>
 
+        <DataTemplate x:DataType="model:TimeItem" x:Key="TimeTemplate">
+            <StackLayout>
+                <Label HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Id}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+        </DataTemplate>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
         <StackLayout 
           Orientation="Vertical"
@@ -63,25 +83,40 @@
                        Padding="10,10,0,0"
                 />
             </Grid>
-
+            
             <ListView ItemsSource="{Binding Projets}" 
                       ItemTemplate="{StaticResource ProjetsTemplate}"
                       Margin="10"
-                      HasUnevenRows="True"/>
+                      HasUnevenRows="True"
+                      ItemSelected="ListView_OnItemSelected"
+                      ItemTapped="ItemTapped"/>
 
-            <Label Text="Chrono"
+            <Label Text="{Binding Seconds}"
+                   TextColor="Black"
+                   FontSize="32"
                 HorizontalOptions="CenterAndExpand"
                        VerticalOptions="EndAndExpand"
                   />
 
-            <Button Text="Timer"
+            <StackLayout Orientation="Horizontal">
+            <Button Text="Start"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="EndAndExpand"
                         BackgroundColor="LightBlue"
                         CornerRadius="32"
                         HeightRequest="64"
-                        Command="{Binding AjoutProjet}"/>
-
+                        WidthRequest="128"
+                        Command="{Binding StartTimer}"/>
+            <Button Text="Stop"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="EndAndExpand"
+                        BackgroundColor="LightBlue"
+                        CornerRadius="32"
+                        HeightRequest="64"
+                        WidthRequest="128"
+                        Command="{Binding StopTimer}"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
+
 </ContentPage>

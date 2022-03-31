@@ -16,5 +16,20 @@ namespace TimeTracker.Apps.ViewModels
 {
     internal class ProjetViewModel : ViewModelBase
     {
+        public ICommand Edit { get; }
+        public ICommand Supp { get; }
+
+        public ProjetViewModel()
+        {
+            Edit = new Command(EditerProjet);
+            Supp = new Command(SupprimerProjet);
+        }
+
+        private void EditerProjet()
+        {
+        }
+        private void SupprimerProjet()
+        {
+        }
     }
 }

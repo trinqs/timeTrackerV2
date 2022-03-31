@@ -6,7 +6,30 @@
              x:Class="TimeTracker.Apps.Pages.ProjetView">
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="12,0,12,48">
-            
+            <Label Text="nom"/>
+            <Label Text="description"/>
+            <Label Text="Temps"/>
+            <Label Text="Taches :"/>
+            <Grid ColumnDefinitions="*,*">
+                <Button Text="Editer"
+                        Grid.Column="0"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="EndAndExpand"
+                        BackgroundColor="LightBlue"
+                        CornerRadius="32"
+                        HeightRequest="64"
+                        WidthRequest="128"
+                        Command="{Binding Edit}"/>
+                <Button Text="Supprimer"
+                        Grid.Column="1"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="EndAndExpand"
+                        BackgroundColor="LightBlue"
+                        CornerRadius="32"
+                        HeightRequest="64"
+                        WidthRequest="128"
+                        Command="{Binding Supp}"/>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

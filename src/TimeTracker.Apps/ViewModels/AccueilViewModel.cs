@@ -3,6 +3,7 @@ using Storm.Mvvm.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,9 +17,30 @@ namespace TimeTracker.Apps.ViewModels
 {
     internal class AccueilViewModel : ViewModelBase
     {
+        Stopwatch stopwatch = new Stopwatch();
+        private DateTime debut;
+        private DateTime fin;
+        private String _seconds;
+
+        public String Seconds {
+            get => _seconds;
+            set => SetProperty(ref _seconds, value);
+        }
 
         public ICommand VoirProfil { get; }
         public ICommand AjoutProjet { get; }
+        public ICommand StartTimer { get; }
+        public ICommand StopTimer { get; }
+
+
+
+        private EventHandler _selectedItem;
+
+        public EventHandler SelectedItem
+        {
+            get => _selectedItem;
+            set => SetProperty(ref _selectedItem, null);
+        }
 
         private ObservableCollection<ProjectItem> _projets;
         public ObservableCollection<ProjectItem> Projets
@@ -31,6 +53,11 @@ namespace TimeTracker.Apps.ViewModels
         {
             VoirProfil = new Command(GoToProfil);
             AjoutProjet = new Command(GoToProjet);
+
+            StartTimer = new Command(Start);
+            StopTimer = new Command(Stop);
+            Seconds = stopwatch.Elapsed.Seconds.ToString();
+
             Projets = new ObservableCollection<ProjectItem>();
             creerJeuTest();
         }
@@ -45,6 +72,16 @@ namespace TimeTracker.Apps.ViewModels
         {
             INavigationService navigationService = DependencyService.Get<INavigationService>();
             navigationService.PushAsync<ProjetView>();
+        }
+
+        private async void Start()
+        {
+            debut = DateTime.Today;
+        }
+
+        private async void Stop()
+        {
+            fin = DateTime.Today;
         }
 
         private async void creerJeuTest()

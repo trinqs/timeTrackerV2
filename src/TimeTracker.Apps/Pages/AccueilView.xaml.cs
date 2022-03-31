@@ -17,5 +17,17 @@ namespace TimeTracker.Apps.Pages
             InitializeComponent();
             BindingContext = new AccueilViewModel();
         }
+
+        private void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            ((ListView)sender).SelectedItem = null;
+        }
+
+        async private void ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        {
+            //var item = e.Item as Projets;
+            await Navigation.PushAsync(new ProjetView());
+
+        }
     }
 }

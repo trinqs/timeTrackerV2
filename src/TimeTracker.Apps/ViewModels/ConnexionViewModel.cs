@@ -38,8 +38,8 @@ namespace TimeTracker.Apps.ViewModels
 
 		public ConnexionViewModel()
 		{
-			Login = "";
-			Password = "";
+			Login = "@";
+			Password = "a";
 
 			ConnexionAcceuil = new Command(Connexion);
 			GoToInscription = new Command(InscriptionNavigation);
