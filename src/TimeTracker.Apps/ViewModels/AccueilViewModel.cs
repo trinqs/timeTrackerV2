@@ -1,4 +1,5 @@
-﻿using Storm.Mvvm;
+﻿using Microcharts;
+using Storm.Mvvm;
 using Storm.Mvvm.Services;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ namespace TimeTracker.Apps.ViewModels
         public ICommand AjoutProjet { get; }
         public ICommand StartTimer { get; }
         public ICommand StopTimer { get; }
+        public ICommand VoirGraphique { get; }
 
         private ObservableCollection<ProjectItem> _projets;
         public ObservableCollection<ProjectItem> Projets
@@ -42,34 +44,36 @@ namespace TimeTracker.Apps.ViewModels
         public AccueilViewModel()
         {
             VoirProfil = new Command(GoToProfil);
-            AjoutProjet = new Command(GoToProjet);
+            AjoutProjet = new Command(GoToCreerProjet);
 
             StartTimer = new Command(Start);
             StopTimer = new Command(Stop);
             Seconds = stopwatch.Elapsed.Seconds.ToString();
 
+            VoirGraphique = new Command(GoToGraphique);
+
             Projets = new ObservableCollection<ProjectItem>();
             getProjets();
         }
 
-        private void GoToProfil()
+        private async void GoToProfil()
         {
             INavigationService navigationService = DependencyService.Get<INavigationService>();
-            navigationService.PushAsync<ProfilView>();
+            await navigationService.PushAsync<ProfilView>();
         }
 
-        private void GoToProjet()
+        private async void GoToCreerProjet()
         {
             INavigationService navigationService = DependencyService.Get<INavigationService>();
-            navigationService.PushAsync<CreerProjetView>();
+            await navigationService.PushAsync<CreerProjetView>();
         }
 
-        private async void Start()
+        private void Start()
         {
             debut = DateTime.Today;
         }
 
-        private async void Stop()
+        private void Stop()
         {
             fin = DateTime.Today;
         }
@@ -77,6 +81,26 @@ namespace TimeTracker.Apps.ViewModels
         private async void getProjets()
         {
             Projets = await ProjetService.GetAllProject();
+        }
+
+        
+        public override Task OnResume()
+        {
+            return new Task( () => { getProjets(); });
+        }
+        
+
+        private async void GoToGraphique()
+        {
+            List<ChartEntry> chartEntries = new List<ChartEntry>();
+            foreach (ProjectItem projet in Projets)
+            {
+                chartEntries.Add(new ChartEntry(projet.TotalSeconds) { Label = projet.Name , ValueLabel = projet.TotalSeconds.ToString()});
+            }
+
+            INavigationService navigationService = DependencyService.Get<INavigationService>();
+            await navigationService.PushAsync(new GraphiqueView(chartEntries));
+
         }
     }
 }

@@ -44,16 +44,16 @@
 
             <Button
                 Text="Connexion"
-                BackgroundColor="DarkBlue"
+                BackgroundColor="LightBlue"
                 CornerRadius="32"
-                TextColor="White"
+                TextColor="Black"
                 HorizontalOptions="CenterAndExpand"
                 Padding="30,15,30,15"
                 Command="{Binding ConnexionAcceuil}"/>
 
-            <Label Text="Pas encore inscrit?"
+            <Label Text="Pas encore inscrit ?"
                    FontSize="16"
-                   TextColor="Black"
+                   TextColor="LightBlue"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
                    Margin="0,30,0,0"/>
@@ -62,7 +62,7 @@
                 Text="Inscription"
                 BackgroundColor="White"
                 BorderWidth="1"
-                BorderColor="Blue"
+                BorderColor="LightBlue"
                 CornerRadius="32"
                 TextColor="Black"
                 HorizontalOptions="CenterAndExpand"
