@@ -88,7 +88,8 @@
                       ItemTemplate="{StaticResource ProjetsTemplate}"
                       Margin="10"
                       HasUnevenRows="True"
-                      ItemSelected="ListView_OnItemSelected"/>
+                      ItemSelected="ListView_OnItemSelected"
+                      ItemTapped="ItemTapped"/>
 
             <Label Text="{Binding Seconds}"
                    TextColor="Black"
