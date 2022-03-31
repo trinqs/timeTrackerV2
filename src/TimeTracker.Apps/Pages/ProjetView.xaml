@@ -33,23 +33,66 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="12,0,12,48">
-            <Label Text="CA ENVOIT PAS LES INFOS"
-                   FontAttributes="Bold"/>
-            <Label Text="nom"/>
-            <Label Text="description"/>
-            <Label Text="Temps"/>
+        <StackLayout VerticalOptions="FillAndExpand" 
+                     HorizontalOptions="FillAndExpand" 
+                     Margin="12,10,12,48"
+                     Spacing="10">
+
+            <Grid ColumnDefinitions="*,*"
+                  RowSpacing="15">
+            <Label Text="Nom"
+                   FontSize="32"
+                   TextColor="Black"
+                   HeightRequest="50"
+                   Grid.Column="0"
+                   Grid.Row="0"/>
+            <Label Text="{Binding Projet.Name}"
+                   HeightRequest="50"
+                   FontSize="32"
+                   TextColor="Black"
+                   Grid.Column="1"
+                   Grid.Row="0"/>
+                
+            <Label Text="description"
+                   FontSize="20"
+                   TextColor="Black"
+                   HeightRequest="50"
+                   Grid.Column="0"
+                   Grid.Row="1"/>
+            <Label Text="{Binding Projet.Description}"
+                   FontSize="15"
+                   TextColor="Black"
+                   HeightRequest="150"
+                   Grid.Column="1"
+                   Grid.Row="1"/>
+                
+            <Label Text="Temps total"
+                   FontSize="20"
+                   TextColor="Black"
+                   HeightRequest="50"
+                   Grid.Column="0"
+                   Grid.Row="2"/>
+            <Label Text="{Binding Projet.TotalSeconds}"
+                   FontSize="20"
+                   TextColor="Black"
+                   HeightRequest="50"
+                   Grid.Column="1"
+                   Grid.Row="2"/>
+
+            </Grid>
+
+            <Label Text="Taches :"
+                   FontSize="32"
+                   TextColor="Black"/>
             
-            <Label Text="Taches :"/>
             <ListView ItemsSource="{Binding Taches}" 
                       ItemTemplate="{StaticResource TacheTemplate}"
-                      Margin="10"
                       HasUnevenRows="True"
                       ItemSelected="ListView_OnItemSelected" />
             
-            <Grid ColumnDefinitions="*,*">
+            <StackLayout
+                Orientation="Horizontal">
                 <Button Text="Editer"
-                        Grid.Column="0"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="EndAndExpand"
                         BackgroundColor="LightBlue"
@@ -58,7 +101,6 @@
                         WidthRequest="128"
                         Command="{Binding Edit}"/>
                 <Button Text="Supprimer"
-                        Grid.Column="1"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="EndAndExpand"
                         BackgroundColor="LightBlue"
@@ -66,7 +108,7 @@
                         HeightRequest="64"
                         WidthRequest="128"
                         Command="{Binding Supp}"/>
-            </Grid>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -17,7 +17,16 @@ namespace TimeTracker.Apps.ViewModels
     internal class ProjetViewModel : ViewModelBase
     {
 
+        private ProjectItem _projet;
+
         private ObservableCollection<TaskItem> _taches;
+
+
+        public ProjectItem Projet
+        {
+            get => _projet;
+            set => SetProperty(ref _projet, value);
+        }
 
         public ObservableCollection<TaskItem> Taches
         {
@@ -28,8 +37,10 @@ namespace TimeTracker.Apps.ViewModels
         public ICommand Edit { get; }
         public ICommand Supp { get; }
 
-        public ProjetViewModel()
+        public ProjetViewModel(ProjectItem projet)
         {
+            Projet = projet;
+
             Edit = new Command(EditerProjet);
             Supp = new Command(SupprimerProjet);
 
