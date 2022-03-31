@@ -21,7 +21,9 @@ namespace TimeTracker.Apps.Pages
         async private void ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
             //var item = e.Item as Projets;
-            await Navigation.PushAsync(new ProjetView());
+            await Navigation.PushAsync(new ProjetView((Dtos.Projects.ProjectItem)e.Item));
+
+
         }
     }
 }

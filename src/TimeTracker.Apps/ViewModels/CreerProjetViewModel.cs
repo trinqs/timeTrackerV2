@@ -58,7 +58,7 @@ namespace TimeTracker.Apps.ViewModels
             {
                 await App.Current.MainPage.DisplayToastAsync("Projet enregistrée", 1000);
                 INavigationService navigationService = DependencyService.Get<INavigationService>();
-                await navigationService.PushAsync<AccueilView>();
+                await navigationService.PopAsync();
             }
             else if(token!= Preferences.Get("access_token", null))
             {
@@ -73,7 +73,7 @@ namespace TimeTracker.Apps.ViewModels
         private void Cancel()
         {
             INavigationService navigationService = DependencyService.Get<INavigationService>();
-            navigationService.PushAsync<AccueilView>();
+            navigationService.PopAsync();
         }
     }
 }
