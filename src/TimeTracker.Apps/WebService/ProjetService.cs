@@ -174,7 +174,7 @@ namespace TimeTracker.Apps.WebService
 
             HttpRequestMessage resquest = new HttpRequestMessage()
             {
-                RequestUri = new Uri(Dtos.Urls.HOST + "/" + Dtos.Urls.DELETE_PROJECT),
+                RequestUri = new Uri(Dtos.Urls.HOST + "/api/v1/projects/"+projectId.ToString()),
                 Method = HttpMethod.Delete
             };
 

@@ -51,13 +51,18 @@ namespace TimeTracker.Apps.ViewModels
         private void EditerProjet()
         {
         }
-        private void SupprimerProjet()
+        private async void SupprimerProjet()
         {
+            await ProjetService.DeleteProject((int)Projet.Id);
+            INavigationService navigationService = DependencyService.Get<INavigationService>();
+            await navigationService.PopAsync();
+
         }
 
         private async void afficherTache()
         {
-            Taches = await TaskService.GetAllTask(165); // A CHANGER
+            Taches = await TaskService.GetAllTask((int)Projet.Id); // A CHANGER
+            
         }
     }
 }
