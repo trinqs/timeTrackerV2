@@ -71,7 +71,7 @@ namespace TimeTracker.Apps.ViewModels
         private void GoToProjet()
         {
             INavigationService navigationService = DependencyService.Get<INavigationService>();
-            navigationService.PushAsync<ProjetView>();
+            navigationService.PushAsync<CreerProjetView>();
         }
 
         private async void Start()
