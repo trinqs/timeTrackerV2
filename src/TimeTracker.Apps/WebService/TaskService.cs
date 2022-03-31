@@ -14,12 +14,13 @@ namespace TimeTracker.Apps.WebService
     internal class TaskService
     {
         public static async Task<ObservableCollection<TaskItem>> GetAllTask(int projectId)
+
         {
             HttpClient client = new HttpClient();
 
             var resquest = new HttpRequestMessage()
             {
-                RequestUri = new Uri(Dtos.Urls.HOST + "/" + Dtos.Urls.LIST_TASKS),
+                RequestUri = new Uri(Dtos.Urls.HOST + "/api/v1/projects/"+projectId.ToString()+ "/tasks"),
                 Method = HttpMethod.Get
             };
 
@@ -33,12 +34,14 @@ namespace TimeTracker.Apps.WebService
                 if (data.GetValue("is_success").ToString() == "True")
                 {
                     ObservableCollection<TaskItem> jsonData = JsonConvert.DeserializeObject<ObservableCollection<TaskItem>>(data.GetValue("data").ToString());
+                    Console.WriteLine("Super genial");
                     return jsonData;
                 }
             }
             else
             {
                 JObject data = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+
                 if (data.GetValue("error_code").ToString() == "Unauthorized")
                 {
                     await AuthentificationService.Refresh();
@@ -71,7 +74,7 @@ namespace TimeTracker.Apps.WebService
 
             HttpRequestMessage resquest = new HttpRequestMessage()
             {
-                RequestUri = new Uri(Dtos.Urls.HOST + "/" + Dtos.Urls.UPDATE_PROJECT),
+                RequestUri = new Uri(Dtos.Urls.HOST + "/api/v1/projects/"+projectId.ToString()+ "/tasks"),
                 Method = HttpMethod.Post,
                 Content = new StringContent(body, Encoding.UTF8, "application/json")
             };
@@ -123,7 +126,7 @@ namespace TimeTracker.Apps.WebService
 
             HttpRequestMessage resquest = new HttpRequestMessage()
             {
-                RequestUri = new Uri(Dtos.Urls.HOST + "/" + Dtos.Urls.UPDATE_TASK),
+                RequestUri = new Uri(Dtos.Urls.HOST + "/api/v1/projects/" + projectId.ToString() + "/tasks"+taskId.ToString()),
                 Method = HttpMethod.Put,
                 Content = new StringContent(body, Encoding.UTF8, "application/json")
             };
@@ -163,7 +166,7 @@ namespace TimeTracker.Apps.WebService
 
             HttpRequestMessage resquest = new HttpRequestMessage()
             {
-                RequestUri = new Uri(Dtos.Urls.HOST + "/" + Dtos.Urls.DELETE_TASK),
+                RequestUri = new Uri(Dtos.Urls.HOST + "/api/v1/projects/" + projectId.ToString() + "/tasks" + taskId.ToString()),
                 Method = HttpMethod.Delete
             };
 
