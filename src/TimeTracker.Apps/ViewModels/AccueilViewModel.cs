@@ -13,19 +13,22 @@ using TimeTracker.Apps.Pages;
 using TimeTracker.Apps.WebService;
 using TimeTracker.Dtos.Projects;
 using Xamarin.Forms;
+using Xamarin.Essentials;
+using Xamarin.CommunityToolkit.Extensions;
 
 namespace TimeTracker.Apps.ViewModels
 {
     internal class AccueilViewModel : ViewModelBase
     {
         Stopwatch stopwatch = new Stopwatch();
-        private DateTime debut;
-        private DateTime fin;
+        
+        //timeSpan ç utiliser pour mettre à jour le timer
         private String _seconds;
 
         public String Seconds {
             get => _seconds;
             set => SetProperty(ref _seconds, value);
+            
         }
 
         public ICommand VoirProfil { get; }
@@ -68,19 +71,38 @@ namespace TimeTracker.Apps.ViewModels
             await navigationService.PushAsync<CreerProjetView>();
         }
 
-        private void Start()
+        private async void Start()
         {
-            debut = DateTime.Today;
+            if (Preferences.Get("timerEnCours", false))
+            {
+                Preferences.Set("timerEnCours", true);
+                Preferences.Set("depart", DateTime.Now);
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayToastAsync("Timer déjà en cours", 3000);
+            }
+            
         }
 
-        private void Stop()
+        private async void Stop()
         {
-            fin = DateTime.Today;
+            if (Preferences.Get("timerEnCours", true))
+            {
+                Preferences.Set("timerEnCours", false);
+                DateTime depart = Preferences.Get("depart", DateTime.Now);
+
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayToastAsync("Timer déjà en cours", 3000);
+            }
         }
 
         private async void getProjets()
         {
             Projets = await ProjetService.GetAllProject();
+            OnPropertyChanged(nameof(Projets));
         }
 
         

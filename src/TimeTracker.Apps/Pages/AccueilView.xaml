@@ -88,7 +88,7 @@
                         Text="Graphique"
                         BackgroundColor="White"
                         BorderColor="LightBlue"
-                        BorderWidth="5"
+                        BorderWidth="2"
                         TextColor="LightBlue"
                         CornerRadius="32"
                         HeightRequest="44"
