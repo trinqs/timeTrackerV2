@@ -20,9 +20,15 @@ namespace TimeTracker.Apps.Pages
             BindingContext = new ProjetViewModel(projet);
         }
 
-        private void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        /*private void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             ((ListView)sender).SelectedItem = null;
+        }*/
+
+        async private void ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        {
+            await Navigation.PushAsync(new TacheView((Dtos.Projects.TaskItem)e.Item));
+            //((ListView)sender).SelectedItem = null;
         }
     }
 }

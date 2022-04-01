@@ -34,7 +34,6 @@ namespace TimeTracker.Apps.WebService
                 if (data.GetValue("is_success").ToString() == "True")
                 {
                     ObservableCollection<TaskItem> jsonData = JsonConvert.DeserializeObject<ObservableCollection<TaskItem>>(data.GetValue("data").ToString());
-                    Console.WriteLine("Super genial");
                     return jsonData;
                 }
             }

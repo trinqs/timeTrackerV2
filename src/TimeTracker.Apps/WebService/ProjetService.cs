@@ -33,7 +33,6 @@ namespace TimeTracker.Apps.WebService
                 JObject data = JObject.Parse(response.Content.ReadAsStringAsync().Result);
                 if (data.GetValue("is_success").ToString() == "True")
                 {
-                    Console.WriteLine("salut salut");
                     ObservableCollection<ProjectItem> jsonData = JsonConvert.DeserializeObject<ObservableCollection<ProjectItem>>(data.GetValue("data").ToString());
                     return jsonData;
                 }
