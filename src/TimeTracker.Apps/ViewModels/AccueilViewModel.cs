@@ -56,6 +56,11 @@ namespace TimeTracker.Apps.ViewModels
             VoirGraphique = new Command(GoToGraphique);
 
             Projets = new ObservableCollection<ProjectItem>();
+        }
+
+        public override async Task OnResume()
+        {
+            await base.OnResume();
             getProjets();
         }
 
@@ -104,13 +109,6 @@ namespace TimeTracker.Apps.ViewModels
             Projets = await ProjetService.GetAllProject();
             OnPropertyChanged(nameof(Projets));
         }
-
-        
-        public override Task OnResume()
-        {
-            return new Task( () => { getProjets(); });
-        }
-        
 
         private async void GoToGraphique()
         {
