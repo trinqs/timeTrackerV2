@@ -90,7 +90,7 @@
                       ItemTemplate="{StaticResource TacheTemplate}"
                       HasUnevenRows="True"
                       SelectionMode="None"
-                       />
+                      ItemTapped="ItemTapped" />
             
             <StackLayout
                 Orientation="Horizontal">
