@@ -29,6 +29,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Update="Pages\CreerTempsView.xaml.cs">
+        <DependentUpon>CreerTempsView.xaml</DependentUpon>
+      </Compile>
       <Compile Update="Pages\ProjetView.xaml.cs">
         <DependentUpon>ProjetView.xaml</DependentUpon>
       </Compile>
@@ -45,6 +48,9 @@
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Pages\CreerProjetView.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Pages\CreerTempsView.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Pages\GraphiqueView.xaml">

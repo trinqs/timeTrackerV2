@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TimeTracker.Apps.Pages.CreerTemps"
+             xmlns:viewmodels="clr-namespace:TimeTracker.Apps.ViewModels;assembly=TimeTracker.Apps" 
+             xmlns:model="clr-namespace:TimeTracker.Dtos.Projects;assembly=TimeTracker.Dtos"
+             x:DataType="viewmodels:CreerTempsViewModel">
+
+    <ContentPage.Resources>
+        <DataTemplate x:DataType="model:ProjectItem" x:Key="ProjetsTemplate">
+            <ViewCell>
+                <Frame HasShadow="False" CornerRadius="15" Margin="0,5" Padding="10" BackgroundColor="RosyBrown">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                        <Grid ColumnDefinitions="*,*"
+                              HorizontalOptions="CenterAndExpand"
+                              VerticalOptions="CenterAndExpand" >
+                            <Label Text="{Binding Name}"
+                                   FontSize="32"
+                                   LineBreakMode="WordWrap"
+                                   TextColor="#F8F8F8"
+                                   Grid.Column="0"
+                                   Grid.Row="0"/>
+                            <Label Text="{Binding TotalSeconds}"
+                                   FontSize="32"
+                                   TextColor="Black"
+                                   Grid.Column="1"
+                                   Grid.Row="0"/>
+                        </Grid>
+                        <Label Text="{Binding Description}"
+                               FontSize="20"
+                               TextColor="Black"
+                                   />
+                    </StackLayout>
+                </Frame>
+            </ViewCell>
+        </DataTemplate>
+
+        <DataTemplate x:DataType="model:TaskItem" x:Key="TasksTemplate">
+            <ViewCell>
+                <Frame HasShadow="False" CornerRadius="15" Margin="0,5" Padding="10" BackgroundColor="Yellow">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                        <Label Text="{Binding Name}"
+                               FontSize="32"
+                               LineBreakMode="WordWrap"
+                               TextColor="#F8F8F8"
+                               Grid.Column="0"
+                               Grid.Row="0"/>
+                    </StackLayout>
+                </Frame>
+            </ViewCell>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="A quelle tâche vous êtes vous consacrez ?"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand" 
+                   FontSize="Title"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                />
+
+            <ListView ItemsSource="{Binding Projets}" 
+                      ItemTemplate="{StaticResource ProjetsTemplate}"
+                      Margin="10"
+                      HasUnevenRows="True"
+                      SelectionMode="Single"
+                      />
+
+            <ListView ItemsSource="{Binding Projets}" 
+                      ItemTemplate="{StaticResource TasksTemplate}"
+                      Margin="10"
+                      HasUnevenRows="True"
+                      SelectionMode="Single"
+                      IsEnabled="False"
+                      />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
