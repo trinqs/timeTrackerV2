@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Storm.Mvvm.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ using Xamarin.Forms.Xaml;
 namespace TimeTracker.Apps.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProjetView : ContentPage
+    public partial class ProjetView : BaseContentPage
     {
         public ProjetView(ProjectItem projet)
         {
