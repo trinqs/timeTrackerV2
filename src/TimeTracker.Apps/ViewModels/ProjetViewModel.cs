@@ -45,6 +45,11 @@ namespace TimeTracker.Apps.ViewModels
             Supp = new Command(SupprimerProjet);
 
             Taches = new ObservableCollection<TaskItem>();
+        }
+
+        public override async Task OnResume()
+        {
+            await base.OnResume();
             afficherTache();
         }
 
@@ -61,7 +66,7 @@ namespace TimeTracker.Apps.ViewModels
 
         private async void afficherTache()
         {
-            Taches = await TaskService.GetAllTask((int)Projet.Id); // A CHANGER
+            Taches = await TaskService.GetAllTask((int)Projet.Id);
             
         }
     }
