@@ -67,7 +67,6 @@ namespace TimeTracker.Apps.ViewModels
         private async void afficherTache()
         {
             Taches = await TaskService.GetAllTask((int)Projet.Id);
-            
         }
     }
 }

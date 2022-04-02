@@ -4,16 +4,100 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:TimeTracker.Apps.ViewModels" 
+             xmlns:model="clr-namespace:TimeTracker.Dtos.Projects;assembly=TimeTracker.Dtos"
              x:DataType="viewmodels:TacheViewModel"
              x:Class="TimeTracker.Apps.Pages.TacheView">
+    <forms:BaseContentPage.Resources>
+        <DataTemplate x:DataType="model:TimeItem" x:Key="TimeTemplate">
+            <ViewCell>
+                <Frame HasShadow="False" CornerRadius="15" Margin="0,5" Padding="10" BackgroundColor="RosyBrown">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" >
+                        <Grid ColumnDefinitions="*,*"
+                              HorizontalOptions="CenterAndExpand"
+                              VerticalOptions="CenterAndExpand" >
+                            <Label Text="Début"
+                                   FontSize="20"
+                                   LineBreakMode="WordWrap"
+                                   TextColor="#F8F8F8"
+                                   Grid.Column="0"
+                                   Grid.Row="0"/>
+                            <Label Text="{Binding StartTime}"
+                                   FontSize="20"
+                                   LineBreakMode="WordWrap"
+                                   TextColor="#F8F8F8"
+                                   Grid.Column="1"
+                                   Grid.Row="0"/>
+                            <Label Text="Fin"
+                                   FontSize="20²"
+                                   LineBreakMode="WordWrap"
+                                   TextColor="#F8F8F8"
+                                   Grid.Column="0"
+                                   Grid.Row="1"/>
+                            <Label Text="{Binding EndTime}"
+                                   FontSize="20"
+                                   TextColor="Black"
+                                   Grid.Column="1"
+                                   Grid.Row="1"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </ViewCell>
+        </DataTemplate>
+    </forms:BaseContentPage.Resources>
+    
     <forms:BaseContentPage.Content>
         <StackLayout>
+            <StackLayout Orientation="Horizontal">
             <Label Text="Tache"
+                TextColor="Black"
+                FontSize="30"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Label Text="{Binding Tache.Name}"
+                <Label Text="{Binding Tache.Name}"
                 VerticalOptions="CenterAndExpand" 
+                FontSize="30"
+                TextColor="Black"
                 HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+            <Label Text="Historique de la tâche"
+                TextColor="Black"
+                FontSize="30"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"/>
+
+            <ListView ItemsSource="{Binding Temps}" 
+                      ItemTemplate="{StaticResource TimeTemplate}"
+                      HasUnevenRows="True"
+                      SelectionMode="None" />
+
+            <StackLayout
+                Orientation="Horizontal">
+                <Button Text="Supprimer"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="EndAndExpand"
+                        BackgroundColor="LightBlue"
+                        CornerRadius="32"
+                        HeightRequest="64"
+                        WidthRequest="128"
+                        Command="{Binding SupprimerTache}"/>
+                <Button Text="Timer"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="EndAndExpand"
+                        BackgroundColor="LightBlue"
+                        CornerRadius="32"
+                        HeightRequest="64"
+                        WidthRequest="128"
+                        Command="{Binding EditerTache}"/>
+            </StackLayout>
+            <Button Text="ArreterTimer"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="EndAndExpand"
+                        BackgroundColor="LightBlue"
+                        CornerRadius="32"
+                        HeightRequest="64"
+                        WidthRequest="128"
+                        Command="{Binding CommencerTimer}"/>
+
         </StackLayout>
     </forms:BaseContentPage.Content>
 </forms:BaseContentPage>

@@ -41,39 +41,39 @@
 
             <Grid ColumnDefinitions="*,*"
                   RowSpacing="15">
-            <Label Text="Nom"
+                <Label Text="Nom"
                    FontSize="32"
                    TextColor="Black"
                    HeightRequest="50"
                    Grid.Column="0"
                    Grid.Row="0"/>
-            <Label Text="{Binding Projet.Name}"
+                <Label Text="{Binding Projet.Name}"
                    HeightRequest="50"
                    FontSize="32"
                    TextColor="Black"
                    Grid.Column="1"
                    Grid.Row="0"/>
-                
-            <Label Text="description"
+
+                <Label Text="description"
                    FontSize="20"
                    TextColor="Black"
                    HeightRequest="50"
                    Grid.Column="0"
                    Grid.Row="1"/>
-            <Label Text="{Binding Projet.Description}"
+                <Label Text="{Binding Projet.Description}"
                    FontSize="15"
                    TextColor="Black"
                    HeightRequest="150"
                    Grid.Column="1"
                    Grid.Row="1"/>
-                
-            <Label Text="Temps total"
+
+                <Label Text="Temps total"
                    FontSize="20"
                    TextColor="Black"
                    HeightRequest="50"
                    Grid.Column="0"
                    Grid.Row="2"/>
-            <Label Text="{Binding Projet.TotalSeconds}"
+                <Label Text="{Binding Projet.TotalSeconds}"
                    FontSize="20"
                    TextColor="Black"
                    HeightRequest="50"
@@ -85,13 +85,13 @@
             <Label Text="Taches :"
                    FontSize="32"
                    TextColor="Black"/>
-            
+
             <ListView ItemsSource="{Binding Taches}" 
                       ItemTemplate="{StaticResource TacheTemplate}"
                       HasUnevenRows="True"
                       SelectionMode="None"
                       ItemTapped="ItemTapped" />
-            
+
             <StackLayout
                 Orientation="Horizontal">
                 <Button Text="Editer"
