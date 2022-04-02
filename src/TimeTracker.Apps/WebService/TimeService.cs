@@ -12,7 +12,7 @@ namespace TimeTracker.Apps.WebService
 {
     internal class TimeService
     {
-        public static async Task<TimeItem> AddProfil(int projectId, int taskId, DateTime startTime, DateTime endTime)
+        public static async Task<TimeItem> AddTime(int projectId, int taskId, DateTime startTime, DateTime endTime)
         {
             HttpClient client = new HttpClient();
 
