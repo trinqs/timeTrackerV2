@@ -78,10 +78,23 @@ namespace TimeTracker.Apps.ViewModels
 
         private async void Start()
         {
-            if (Preferences.Get("timerEnCours", false))
+            if (Preferences.Get("timerEnCours", false) == false)
             {
                 Preferences.Set("timerEnCours", true);
                 Preferences.Set("depart", DateTime.Now);
+                Device.StartTimer(new TimeSpan(0, 0, 1), 
+                    () =>
+                 {
+                     if (Preferences.Get("timerEnCours", false) == true)
+                     {
+                         Seconds = (DateTime.Now - Preferences.Get("depart", DateTime.Now)).TotalSeconds.ToString();
+                         return true;
+                     }
+                     else
+                     {
+                         return false;
+                     }
+                 });
             }
             else
             {
@@ -92,11 +105,25 @@ namespace TimeTracker.Apps.ViewModels
 
         private async void Stop()
         {
-            if (Preferences.Get("timerEnCours", true))
+            if (Preferences.Get("timerEnCours", false) == true)
             {
                 Preferences.Set("timerEnCours", false);
                 Preferences.Set("fin", DateTime.Now);
 
+                Console.WriteLine("avant le push");
+                try
+                {
+                    INavigationService navigationService = DependencyService.Get<INavigationService>();
+                    await navigationService.PushAsync<CreerTempsView>();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    if (ex.InnerException != null)
+                    {
+                        Console.WriteLine("Inner Exception {0]", ex.InnerException);
+                    }
+                };
             }
             else
             {

@@ -1,4 +1,5 @@
-﻿using TimeTracker.Apps.ViewModels;
+﻿using System;
+using TimeTracker.Apps.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,6 +10,7 @@ namespace TimeTracker.Apps.Pages
     {
         public CreerTempsView()
         {
+            Console.WriteLine("Dans la view");
             InitializeComponent();
             BindingContext = new CreerTempsViewModel();
         }
