@@ -59,15 +59,15 @@ namespace TimeTracker.Apps.WebService
         {
             HttpClient client = new HttpClient();
 
-            /*TaskItem projet = new TaskItem()
-            {
-                Name = nom,
-            };*/
-
             TaskItem projet = new TaskItem()
             {
-                Name = "projet 1",
+                Name = nom,
             };
+
+            /*TaskItem projet = new TaskItem()
+            {
+                Name = "projet 1",
+            };*/
 
             var body = JsonConvert.SerializeObject(projet);
 
