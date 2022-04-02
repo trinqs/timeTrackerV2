@@ -87,7 +87,7 @@ namespace TimeTracker.Apps.ViewModels
                  {
                      if (Preferences.Get("timerEnCours", false) == true)
                      {
-                         Seconds = (DateTime.Now - Preferences.Get("depart", DateTime.Now)).TotalSeconds.ToString();
+                         Seconds = (DateTime.Now - Preferences.Get("depart", DateTime.Now)).ToString(@"hh\:mm\:ss");
                          return true;
                      }
                      else
@@ -111,19 +111,8 @@ namespace TimeTracker.Apps.ViewModels
                 Preferences.Set("fin", DateTime.Now);
 
                 Console.WriteLine("avant le push");
-                try
-                {
-                    INavigationService navigationService = DependencyService.Get<INavigationService>();
-                    await navigationService.PushAsync<CreerTempsView>();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    if (ex.InnerException != null)
-                    {
-                        Console.WriteLine("Inner Exception {0]", ex.InnerException);
-                    }
-                };
+                INavigationService navigationService = DependencyService.Get<INavigationService>();
+                await navigationService.PushAsync<CreerTempsView>();
             }
             else
             {

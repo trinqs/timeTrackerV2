@@ -9,8 +9,9 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArcsConverter"/>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArcConverter"/>
         </ResourceDictionary>
+        
         <DataTemplate x:DataType="model:ProjectItem" x:Key="ProjetsTemplate">
             <ViewCell>
                 <Frame HasShadow="False" CornerRadius="15" Margin="0,5" Padding="10" BackgroundColor="RosyBrown">
@@ -37,11 +38,11 @@
                     </StackLayout>
                 </Frame>
             </ViewCell>
-        </DataTemplate>
+        </DataTemplate> 
 
         <DataTemplate x:DataType="model:TaskItem" x:Key="TasksTemplate">
             <ViewCell>
-                <Frame HasShadow="False" CornerRadius="15" Margin="0,5" Padding="10" BackgroundColor="Yellow">
+                <Frame HasShadow="False" CornerRadius="15" Margin="0,5" Padding="10" BackgroundColor="DarkBlue">
                     <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
                         <Label Text="{Binding Name}"
                                FontSize="32"
@@ -53,7 +54,7 @@
                 </Frame>
             </ViewCell>
         </DataTemplate>
-    </ContentPage.Resources>
+    </ContentPage.Resources> 
 
     <ContentPage.Content>
         <StackLayout>
@@ -71,11 +72,12 @@
                       HasUnevenRows="True"
                       SelectionMode="Single"
                       >
+                
                 <ListView.Behaviors>
                     <xct:EventToCommandBehavior
                         EventName="ItemSelected"
                         Command="{Binding ProjetSelectionneCommand}"
-                        EventArgsConverter="{StaticResource ItemSelectedEventArcConverters}"/>
+                        EventArgsConverter="{StaticResource ItemSelectedEventArcConverter}"/>
                 </ListView.Behaviors>
             </ListView>
 
@@ -90,9 +92,10 @@
                     <xct:EventToCommandBehavior
                         EventName="ItemSelected"
                         Command="{Binding TachesSelectionneCommand}"
-                        EventArgsConverter="{StaticResource ItemSelectedEventArcConverters}"/>
+                        EventArgsConverter="{StaticResource ItemSelectedEventArcConverter}"/>
                 </ListView.Behaviors>
-            </ListView>
-        </StackLayout>
+            </ListView> 
+            
+        </StackLayout> 
     </ContentPage.Content>
 </ContentPage>

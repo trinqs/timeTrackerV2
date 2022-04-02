@@ -66,7 +66,9 @@ namespace TimeTracker.Apps.ViewModels
 
         private async void TacheSelectionne(TaskItem taskItem)
         {
-            //await TimeService.AddTime( (int)Project.Id, (int) taskItem.Id, Preferences.Get("depart",null), Preferences.Get("fin",null) );
+            Console.WriteLine("Avant le addtime");
+            await TimeService.AddTime( (int)Project.Id, (int) taskItem.Id, Preferences.Get("depart",DateTime.MinValue), Preferences.Get("fin",DateTime.MinValue) );
+            Console.WriteLine("Après le addTime");
             Preferences.Remove("depart");
             Preferences.Remove("fin");
             Preferences.Set("timerEnCours", false);
