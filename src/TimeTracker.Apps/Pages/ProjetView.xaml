@@ -49,9 +49,8 @@
                    Grid.Column="0"
                    Grid.Row="0"/>
                 <Label Text="{Binding Projet.Name}"
-                   HeightRequest="50"
-                   
-                   LineBreakMode="WordWrap"
+                   HeightRequest="50"                   
+                   LineBreakMode="TailTruncation"
                    FontSize="32"
                    TextColor="Black"
                    Grid.Column="1"
