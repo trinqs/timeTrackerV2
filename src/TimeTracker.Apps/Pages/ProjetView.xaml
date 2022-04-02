@@ -36,24 +36,22 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" 
                      HorizontalOptions="FillAndExpand" 
-                     Margin="12,10,12,48"
+                     Margin="12,30,12,50"
                      Spacing="10">
 
             <Grid ColumnDefinitions="*,*"
-                  RowSpacing="25"
-                  >
+                  RowSpacing="25">
                 <Label Text="Nom"
                    FontSize="32"
                    TextColor="Black"
                    HeightRequest="50"
                    Grid.Column="0"
                    Grid.Row="0"/>
-                <Label Text="{Binding Projet.Name}"
-                   HeightRequest="50"
-                   
-                   LineBreakMode="WordWrap"
-                   FontSize="32"
+                <Entry Text="{Binding ProjectName}"
+                   HeightRequest="200"
+                   FontSize="28"
                    TextColor="Black"
+                   IsReadOnly="{Binding ReadOnlyLabel}"
                    Grid.Column="1"
                    Grid.Row="0"/>
 
@@ -63,10 +61,11 @@
                    HeightRequest="50"
                    Grid.Column="0"
                    Grid.Row="1"/>
-                <Label Text="{Binding Projet.Description}"
+                <Entry Text="{Binding ProjetDescription}"
                    FontSize="15"
                    TextColor="Black"
-                   HeightRequest="150"
+                   HeightRequest="200"
+                   IsReadOnly="{Binding ReadOnlyLabel}"
                    Grid.Column="1"
                    Grid.Row="1"/>
 
@@ -82,8 +81,13 @@
                    HeightRequest="50"
                    Grid.Column="1"
                    Grid.Row="2"/>
-
             </Grid>
+
+            <Label Text="Vous pouvez modifier les champs Nom et description"
+                   FontSize="15"
+                   IsVisible="{Binding IsVisibleEnregistrerButtonAndLabel}"
+                   TextColor="green"
+                    />
 
             <Label Text="Taches :"
                    FontSize="32"
@@ -102,15 +106,26 @@
                         VerticalOptions="Center"
                         BackgroundColor="LightBlue"
                         CornerRadius="32"
-                        HeightRequest="64"
+                        HeightRequest="50"
                         WidthRequest="128"
+                        IsVisible="{Binding IsVisibleEditerButton}"
                         Command="{Binding Edit}"/>
+                <Button Text="Enregistrer"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="Center"
+                        BackgroundColor="LightBlue"
+                        CornerRadius="32"
+                        HeightRequest="50"
+                        WidthRequest="128"
+                        IsVisible="{Binding IsVisibleEnregistrerButtonAndLabel}"
+                        Command="{Binding EnregistrerChangement}"/>
+                
                 <Button Text="Ajouter tache"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="Center"
                         BackgroundColor="LightBlue"
                         CornerRadius="32"
-                        HeightRequest="64"
+                        HeightRequest="55"
                         WidthRequest="128"
                         Command="{Binding AjouterTache}"/>
             </StackLayout>
@@ -119,8 +134,9 @@
                         VerticalOptions="EndAndExpand"
                         BackgroundColor="LightBlue"
                         CornerRadius="32"
-                        HeightRequest="64"
+                        HeightRequest="55"
                         WidthRequest="128"
+                        
                         Command="{Binding Supp}"/>
 
         </StackLayout>
