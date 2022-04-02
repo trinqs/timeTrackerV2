@@ -128,7 +128,7 @@ namespace TimeTracker.Apps.WebService
 
             HttpRequestMessage resquest = new HttpRequestMessage()
             {
-                RequestUri = new Uri(Dtos.Urls.HOST + "/" + Dtos.Urls.UPDATE_PROJECT),
+                RequestUri = new Uri(Dtos.Urls.HOST + "/api/v1/projects/"+projectId.ToString()),
                 Method = HttpMethod.Put,
                 Content = new StringContent(body, Encoding.UTF8, "application/json")
             };

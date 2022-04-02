@@ -107,6 +107,9 @@ namespace TimeTracker.Apps.ViewModels
             String token = Preferences.Get("access_token", null);
             ProjectItem _userInfo = null;
 
+            Console.WriteLine(ProjectName);
+            Console.WriteLine(ProjetDescription);
+
             if (ProjectName != "" & ProjetDescription != "")
             {
                 _userInfo = await ProjetService.UpdateProject(ProjectName,ProjetDescription, (int)Projet.Id);

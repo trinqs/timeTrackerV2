@@ -47,7 +47,7 @@
                    HeightRequest="50"
                    Grid.Column="0"
                    Grid.Row="0"/>
-                <Entry Text="{Binding Projet.Name}"
+                <Entry Text="{Binding ProjectName}"
                    HeightRequest="50"                   
                    FontSize="32"
                    TextColor="Black"
