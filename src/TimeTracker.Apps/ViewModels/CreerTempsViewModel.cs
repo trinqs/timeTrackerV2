@@ -64,7 +64,11 @@ namespace TimeTracker.Apps.ViewModels
         }
 
         private async void TacheSelectionne(TaskItem taskItem)
-        { 
+        {
+            Console.WriteLine(Preferences.Get("depart", DateTime.MinValue) + "tandis que min" + DateTime.MinValue);
+            Console.WriteLine(Preferences.Get("fin", DateTime.MinValue) + "tandis que min" + DateTime.MinValue);
+            Console.WriteLine(Project.Id);
+            Console.WriteLine(taskItem.Id);
             await TimeService.AddTime( (int)Project.Id, (int) taskItem.Id, Preferences.Get("depart",DateTime.MinValue), Preferences.Get("fin",DateTime.MinValue) );   
             Preferences.Remove("depart");
             Preferences.Remove("fin");

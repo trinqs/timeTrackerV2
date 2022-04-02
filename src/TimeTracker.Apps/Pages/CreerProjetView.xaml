@@ -37,17 +37,17 @@
             <StackLayout Orientation="Horizontal" VerticalOptions="End">
                 <Button
                     Text="Ajouter"
-                    BackgroundColor="DarkBlue"
+                    BackgroundColor="LightBlue"
                     CornerRadius="32"
-                    TextColor="White"
+                    TextColor="Black"
                     HorizontalOptions="CenterAndExpand"
                     Padding="50,15,50,15"
                     Command="{Binding NouveauProjet}"
                 />
 
                 <Button Text="Annuler"
-                    TextColor="White"
-                    BackgroundColor="DarkBlue"
+                    TextColor="Black"
+                    BackgroundColor="LightBlue"
                     CornerRadius="32"
                     Padding="50,15,50,15"
                     HorizontalOptions="CenterAndExpand"

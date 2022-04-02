@@ -118,17 +118,17 @@ namespace TimeTracker.Apps.WebService
         {
             HttpClient client = new HttpClient();
 
-            /*ProjectItem projet = new ProjectItem()
+            ProjectItem projet = new ProjectItem()
             {
                 Name = nom,
                 Description = description
-            };*/
+            };
 
-            ProjectItem projet = new ProjectItem()
+            /*ProjectItem projet = new ProjectItem()
             {
                 Name = "projet 1",
                 Description = "C'est la descripton"
-            };
+            };*/
 
             var body = JsonConvert.SerializeObject(projet);
 

@@ -4,10 +4,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:TimeTracker.Apps.ViewModels;assembly=TimeTracker.Apps" 
              xmlns:model="clr-namespace:TimeTracker.Dtos.Projects;assembly=TimeTracker.Dtos"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:DataType="viewmodels:AccueilViewModel"
              x:Class="TimeTracker.Apps.Pages.AccueilView">
 
     <forms:BaseContentPage.Resources>
+
+        <ResourceDictionary>
+            <xct:ItemTappedEventArgsConverter x:Key="ItemTappedEventArcConverter"/>
+        </ResourceDictionary>
+        
         <DataTemplate x:DataType="model:ProjectItem" x:Key="ProjetsTemplate">
             <ViewCell>
                 <Frame HasShadow="False" CornerRadius="15" Margin="0,5" Padding="10" BackgroundColor="RosyBrown">
@@ -103,8 +109,15 @@
                       Margin="10"
                       HasUnevenRows="True"
                       SelectionMode="None"
-                      ItemTapped="ItemTapped"
-                      />
+                      
+                      >
+                <ListView.Behaviors>
+                    <xct:EventToCommandBehavior
+                        EventName="ItemTapped"
+                        Command="{Binding ItemTappedCommand}"
+                        EventArgsConverter="{StaticResource ItemTappedEventArcConverter}"/>
+                </ListView.Behaviors>
+            </ListView>
 
             <Label Text="{Binding Seconds}"
                    TextColor="Black"

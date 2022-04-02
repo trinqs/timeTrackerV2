@@ -36,6 +36,8 @@ namespace TimeTracker.Apps.ViewModels
         public ICommand StopTimer { get; }
         public ICommand VoirGraphique { get; }
 
+        public ICommand ItemTappedCommand { get; }
+
         private ObservableCollection<ProjectItem> _projets;
         public ObservableCollection<ProjectItem> Projets
         {
@@ -53,6 +55,7 @@ namespace TimeTracker.Apps.ViewModels
             Seconds = stopwatch.Elapsed.Seconds.ToString();
 
             VoirGraphique = new Command(GoToGraphique);
+            ItemTappedCommand = new Command<ProjectItem>(ItemTappedHandler);
 
             Projets = new ObservableCollection<ProjectItem>();
         }
@@ -61,6 +64,18 @@ namespace TimeTracker.Apps.ViewModels
         {
             await base.OnResume();
             getProjets();
+            if (Preferences.Get("timerEnCours", true) == false)
+            {
+                Preferences.Remove("depart");
+                Preferences.Remove("fin");
+                Seconds = "0";
+            }
+        }
+
+        private async void ItemTappedHandler(ProjectItem projectItem)
+        {
+            INavigationService navigationService = DependencyService.Get<INavigationService>();
+            await navigationService.PushAsync(new ProjetView(projectItem));
         }
 
         private async void GoToProfil()

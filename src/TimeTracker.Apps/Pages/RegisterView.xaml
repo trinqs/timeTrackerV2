@@ -75,8 +75,6 @@
             <Button
                 Text="Inscription"
                 BackgroundColor="LightBlue"
-                BorderWidth="1"
-                BorderColor="Black"
                 CornerRadius="32"
                 TextColor="Black"
                 HorizontalOptions="CenterAndExpand"

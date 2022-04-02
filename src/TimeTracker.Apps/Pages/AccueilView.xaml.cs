@@ -19,9 +19,9 @@ namespace TimeTracker.Apps.Pages
             BindingContext = new AccueilViewModel();
         }
 
-        async private void ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        /*async private void ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
             await Navigation.PushAsync(new ProjetView((Dtos.Projects.ProjectItem)e.Item));
-        }
+        }*/
     }
 }

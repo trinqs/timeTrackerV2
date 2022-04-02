@@ -37,8 +37,8 @@ namespace TimeTracker.Apps.ViewModels
 
         public CreerProjetViewModel()
         {
-            Text = "a";
-            Description = "b";
+            Text = "";
+            Description = "";
             NouveauProjet = new Command(NewProjet);
             CancelCommand = new Command(Cancel);
         }
