@@ -36,6 +36,7 @@ namespace TimeTracker.Apps.ViewModels
         {
             Console.WriteLine(tache.Name);
             Tache = tache;
+            Temps = new List<TimeItem>();
             SupprimerTache = new Command(DeleteTache);
             EditerTache = new Command(DeleteTache);
             CommencerTimer = new Command(DeleteTache);
@@ -55,8 +56,6 @@ namespace TimeTracker.Apps.ViewModels
 
         private async void afficherTime()
         {
-            Console.WriteLine(Tache.Times[0]);
-            Console.WriteLine(Tache.Times[1]);
             Temps = Tache.Times;
         }
 
