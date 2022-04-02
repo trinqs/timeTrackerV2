@@ -99,21 +99,30 @@
                 Orientation="Horizontal">
                 <Button Text="Editer"
                         HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="EndAndExpand"
+                        VerticalOptions="Center"
                         BackgroundColor="LightBlue"
                         CornerRadius="32"
                         HeightRequest="64"
                         WidthRequest="128"
                         Command="{Binding Edit}"/>
-                <Button Text="Supprimer"
+                <Button Text="Ajouter tache"
                         HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="Center"
+                        BackgroundColor="LightBlue"
+                        CornerRadius="32"
+                        HeightRequest="64"
+                        WidthRequest="128"
+                        Command="{Binding AjouterTache}"/>
+            </StackLayout>
+            <Button Text="Supprimer Projet"
+                        HorizontalOptions="Center"
                         VerticalOptions="EndAndExpand"
                         BackgroundColor="LightBlue"
                         CornerRadius="32"
                         HeightRequest="64"
                         WidthRequest="128"
                         Command="{Binding Supp}"/>
-            </StackLayout>
+
         </StackLayout>
     </ContentPage.Content>
 </forms:BaseContentPage>
