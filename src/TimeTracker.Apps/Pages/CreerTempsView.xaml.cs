@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using TimeTracker.Apps.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace TimeTracker.Apps.Pages
@@ -9,6 +10,7 @@ namespace TimeTracker.Apps.Pages
         public CreerTempsView()
         {
             InitializeComponent();
+            BindingContext = new CreerTempsViewModel();
         }
 
         async private void ProjetSelected(object sender, Xamarin.Forms.ItemTappedEventArgs e)

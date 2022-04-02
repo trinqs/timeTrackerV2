@@ -4,9 +4,13 @@
              x:Class="TimeTracker.Apps.Pages.CreerTempsView"
              xmlns:viewmodels="clr-namespace:TimeTracker.Apps.ViewModels;assembly=TimeTracker.Apps" 
              xmlns:model="clr-namespace:TimeTracker.Dtos.Projects;assembly=TimeTracker.Dtos"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:DataType="viewmodels:CreerTempsViewModel">
 
     <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArcsConverter"/>
+        </ResourceDictionary>
         <DataTemplate x:DataType="model:ProjectItem" x:Key="ProjetsTemplate">
             <ViewCell>
                 <Frame HasShadow="False" CornerRadius="15" Margin="0,5" Padding="10" BackgroundColor="RosyBrown">
@@ -66,15 +70,29 @@
                       Margin="10"
                       HasUnevenRows="True"
                       SelectionMode="Single"
-                      />
+                      >
+                <ListView.Behaviors>
+                    <xct:EventToCommandBehavior
+                        EventName="ItemSelected"
+                        Command="{Binding ProjetSelectionneCommand}"
+                        EventArgsConverter="{StaticResource ItemSelectedEventArcConverters}"/>
+                </ListView.Behaviors>
+            </ListView>
 
-            <ListView ItemsSource="{Binding Projets}" 
+            <ListView ItemsSource="{Binding Taches}" 
                       ItemTemplate="{StaticResource TasksTemplate}"
                       Margin="10"
                       HasUnevenRows="True"
                       SelectionMode="Single"
-                      IsEnabled="False"
-                      />
+                      IsEnabled="{Binding ProjetChoisiBool}"
+                      >
+                <ListView.Behaviors>
+                    <xct:EventToCommandBehavior
+                        EventName="ItemSelected"
+                        Command="{Binding TachesSelectionneCommand}"
+                        EventArgsConverter="{StaticResource ItemSelectedEventArcConverters}"/>
+                </ListView.Behaviors>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -95,12 +95,12 @@ namespace TimeTracker.Apps.ViewModels
             if (Preferences.Get("timerEnCours", true))
             {
                 Preferences.Set("timerEnCours", false);
-                DateTime depart = Preferences.Get("depart", DateTime.Now);
+                Preferences.Set("fin", DateTime.Now);
 
             }
             else
             {
-                await App.Current.MainPage.DisplayToastAsync("Timer déjà en cours", 3000);
+                await App.Current.MainPage.DisplayToastAsync("Veuillez démarrer un timer", 3000);
             }
         }
 
