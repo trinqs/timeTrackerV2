@@ -28,7 +28,7 @@
                                    Grid.Column="1"
                                    Grid.Row="0"/>
                             <Label Text="Fin"
-                                   FontSize="20²"
+                                   FontSize="20"
                                    LineBreakMode="WordWrap"
                                    TextColor="#F8F8F8"
                                    Grid.Column="0"

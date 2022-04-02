@@ -22,7 +22,6 @@ namespace TimeTracker.Apps.ViewModels
     {
         Stopwatch stopwatch = new Stopwatch();
         
-        //timeSpan ç utiliser pour mettre à jour le timer
         private String _seconds;
 
         public String Seconds {
@@ -109,8 +108,6 @@ namespace TimeTracker.Apps.ViewModels
             {
                 Preferences.Set("timerEnCours", false);
                 Preferences.Set("fin", DateTime.Now);
-
-                Console.WriteLine("avant le push");
                 INavigationService navigationService = DependencyService.Get<INavigationService>();
                 await navigationService.PushAsync<CreerTempsView>();
             }

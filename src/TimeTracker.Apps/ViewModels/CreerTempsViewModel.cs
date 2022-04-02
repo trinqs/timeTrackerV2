@@ -49,7 +49,6 @@ namespace TimeTracker.Apps.ViewModels
 
         public CreerTempsViewModel()
         {
-            Console.WriteLine("Dans le viewModel");
             Projets = new ObservableCollection<ProjectItem>();
             Taches = new ObservableCollection<TaskItem>();
             ProjetSelectionneCommand = new Command<ProjectItem>(ProjetSelectionne);
@@ -65,10 +64,8 @@ namespace TimeTracker.Apps.ViewModels
         }
 
         private async void TacheSelectionne(TaskItem taskItem)
-        {
-            Console.WriteLine("Avant le addtime");
-            await TimeService.AddTime( (int)Project.Id, (int) taskItem.Id, Preferences.Get("depart",DateTime.MinValue), Preferences.Get("fin",DateTime.MinValue) );
-            Console.WriteLine("Après le addTime");
+        { 
+            await TimeService.AddTime( (int)Project.Id, (int) taskItem.Id, Preferences.Get("depart",DateTime.MinValue), Preferences.Get("fin",DateTime.MinValue) );   
             Preferences.Remove("depart");
             Preferences.Remove("fin");
             Preferences.Set("timerEnCours", false);
