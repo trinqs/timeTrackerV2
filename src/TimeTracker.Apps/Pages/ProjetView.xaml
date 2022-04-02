@@ -47,11 +47,11 @@
                    HeightRequest="50"
                    Grid.Column="0"
                    Grid.Row="0"/>
-                <Entry Text="{Binding ProjectName}"
-                   HeightRequest="50"                   
-                   FontSize="32"
+                <Label Text="{Binding ProjectName}"
+                   HeightRequest="150"                   
+                   WidthRequest="150"
+                   FontSize="28"
                    TextColor="Black"
-                   IsReadOnly="{Binding ReadOnlyLabel}"
                    Grid.Column="1"
                    Grid.Row="0"/>
 
@@ -61,14 +61,13 @@
                    HeightRequest="50"
                    Grid.Column="0"
                    Grid.Row="1"/>
-                <Entry Text="{Binding ProjetDescription}"
+                <Label Text="{Binding ProjetDescription}"
                    FontSize="15"
                    TextColor="Black"
                    HeightRequest="200"
-                   IsReadOnly="{Binding ReadOnlyLabel}"
                    Grid.Column="1"
                    Grid.Row="1"/>
-
+                
                 <Label Text="Temps total"
                    FontSize="20"
                    TextColor="Black"
@@ -83,16 +82,17 @@
                    Grid.Row="2"/>
             </Grid>
 
-            <Label Text="Vous pouvez modifier les champs Nom et description"
-                   FontSize="15"
-                   IsVisible="{Binding IsVisibleEnregistrerButtonAndLabel}"
-                   TextColor="green"
-                    />
-
-            <Label Text="Taches :"
+            <StackLayout Orientation="Horizontal">
+            <Label Text="Taches"
+                   FontSize="32"
+                   HorizontalOptions="CenterAndExpand"
+                   TextColor="Black"/>
+                <Label Text="Temps Total"
+                   HorizontalOptions="CenterAndExpand"
                    FontSize="32"
                    TextColor="Black"/>
-
+            </StackLayout>
+                
             <ListView ItemsSource="{Binding Taches}" 
                       ItemTemplate="{StaticResource TacheTemplate}"
                       HasUnevenRows="True"
@@ -108,18 +108,8 @@
                         CornerRadius="32"
                         HeightRequest="50"
                         WidthRequest="128"
-                        IsVisible="{Binding IsVisibleEditerButton}"
                         Command="{Binding Edit}"/>
-                <Button Text="Enregistrer"
-                        HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="Center"
-                        BackgroundColor="LightBlue"
-                        CornerRadius="32"
-                        HeightRequest="50"
-                        WidthRequest="128"
-                        IsVisible="{Binding IsVisibleEnregistrerButtonAndLabel}"
-                        Command="{Binding EnregistrerChangement}"/>
-                
+
                 <Button Text="Ajouter tache"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="Center"

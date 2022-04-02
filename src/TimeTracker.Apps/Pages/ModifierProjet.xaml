@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TimeTracker.Apps.ViewModels"
+             x:DataType="viewmodels:ModifierProjetViewModel"
+             x:Class="TimeTracker.Apps.Pages.ModifierProjet">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Modifier le projet"
+                   FontSize="32"
+                   TextColor="Black"
+                   HeightRequest="50"
+                   Grid.Column="0"
+                   Grid.Row="0"/>
+            <Grid ColumnDefinitions="*,*">
+                <Label Text="Nom du projet :"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    FontSize="20"
+                    TextColor="Black"
+                    HeightRequest="50"
+                    Grid.Column="0"
+                    Grid.Row="0"/>
+                <Entry Text="{Binding NameProjet}"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    FontSize="20"
+                    TextColor="Black"
+                    Grid.Column="1"
+                    Grid.Row="0"/>
+                <Label Text="Description du projet :"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    FontSize="20"
+                    TextColor="Black"
+                    HeightRequest="50"
+                    Grid.Column="0"
+                    Grid.Row="1"/>
+                <Editor Text="{Binding DescriptionProjet}"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand"
+                    HeightRequest="100"
+                    WidthRequest="200"
+                    FontSize="20"
+                    TextColor="Black"
+                    Grid.Column="1"
+                    Grid.Row="1"/>
+            </Grid>
+            <Button Text="Enregistrer modification"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        BackgroundColor="LightBlue"
+                        CornerRadius="32"
+                        Command="{Binding ModifierProjet}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

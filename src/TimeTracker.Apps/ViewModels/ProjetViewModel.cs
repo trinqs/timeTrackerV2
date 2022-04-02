@@ -18,17 +18,18 @@ namespace TimeTracker.Apps.ViewModels
 {
     internal class ProjetViewModel : ViewModelBase
     {
-
+        private int _idProjet;
         private ProjectItem _projet;
         private ObservableCollection<TaskItem> _taches;
 
         private string _projectName;
         private string _projectDescription;
 
-        private bool _readOnlyLabel;
-        private bool _isVisibleEditerButton;
-        private bool _isVisibleEnregistrerButtonAndLabel;
-
+        public int IdProjet
+        {
+            get => _idProjet;
+            set => SetProperty(ref _idProjet, value);
+        }
 
         public ProjectItem Projet
         {
@@ -51,40 +52,18 @@ namespace TimeTracker.Apps.ViewModels
             get => _projectDescription;
             set => SetProperty(ref _projectDescription, value);
         }
-        public bool ReadOnlyLabel
-        {
-            get => _readOnlyLabel;
-            set => SetProperty(ref _readOnlyLabel, value);
-        }
-        public bool IsVisibleEditerButton
-        {
-            get => _isVisibleEditerButton;
-            set => SetProperty(ref _isVisibleEditerButton, value);
-        }
-        public bool IsVisibleEnregistrerButtonAndLabel
-        {
-            get => _isVisibleEnregistrerButtonAndLabel;
-            set => SetProperty(ref _isVisibleEnregistrerButtonAndLabel, value);
-        }
 
         public ICommand Edit { get; }
         public ICommand Supp { get; }
         public ICommand AjouterTache { get; }
-        public ICommand EnregistrerChangement { get; }
 
-        public ProjetViewModel(ProjectItem projet)
+        public ProjetViewModel(int idProjet)
         {
-            Projet = projet;
-            ReadOnlyLabel =true;
-            IsVisibleEditerButton = true;
-            IsVisibleEnregistrerButtonAndLabel = false;
-            ProjectName = Projet.Name;
-            ProjetDescription = Projet.Description;
+            IdProjet = idProjet;
 
             Edit = new Command(EditerProjet);
             Supp = new Command(SupprimerProjet);
             AjouterTache = new Command(AddTache);
-            EnregistrerChangement = new Command(EnregistrerModification);
 
             Taches = new ObservableCollection<TaskItem>();
         }
@@ -95,42 +74,12 @@ namespace TimeTracker.Apps.ViewModels
             afficherTache();
         }
 
-        private void EditerProjet()
+        private async void EditerProjet()
         {
-            ReadOnlyLabel = false;
-            IsVisibleEditerButton = false;
-            IsVisibleEnregistrerButtonAndLabel = true;
+            INavigationService navigationService = DependencyService.Get<INavigationService>();
+            await navigationService.PushAsync(new ModifierProjet(Projet));
         }
 
-        private async void EnregistrerModification()
-        {
-            String token = Preferences.Get("access_token", null);
-            ProjectItem _userInfo = null;
-
-            Console.WriteLine(ProjectName);
-            Console.WriteLine(ProjetDescription);
-
-            if (ProjectName != "" & ProjetDescription != "")
-            {
-                _userInfo = await ProjetService.UpdateProject(ProjectName,ProjetDescription, (int)Projet.Id);
-            }
-
-            if (_userInfo != null)
-            {
-                ReadOnlyLabel = true;
-                IsVisibleEditerButton = true;
-                IsVisibleEnregistrerButtonAndLabel = false;
-                await App.Current.MainPage.DisplayToastAsync("Enregistrement Effectué", 1000);
-            }
-            else if (token != Preferences.Get("access_token", null))
-            {
-                EnregistrerModification();
-            }
-            else
-            {
-                await App.Current.MainPage.DisplayToastAsync("Un problème est survenu, assuré vous que vous avez tout bien remplie correctement", 1000);
-            }
-        }
         private async void SupprimerProjet()
         {
             await ProjetService.DeleteProject((int)Projet.Id);
@@ -146,6 +95,11 @@ namespace TimeTracker.Apps.ViewModels
 
         private async void afficherTache()
         {
+            Projet = await ProjetService.GetProjetById(IdProjet);
+
+            ProjectName = Projet.Name;
+            ProjetDescription = Projet.Description;
+
             Taches = await TaskService.GetAllTask((int)Projet.Id);
         }
     }

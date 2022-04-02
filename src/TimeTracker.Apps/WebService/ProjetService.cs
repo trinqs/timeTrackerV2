@@ -54,9 +54,20 @@ namespace TimeTracker.Apps.WebService
             return null;
         }
 
-        private static void Refresh()
+        public static async Task<ProjectItem> GetProjetById(int idProjet)
         {
-            throw new NotImplementedException();
+            ObservableCollection<ProjectItem> listeProjet = await GetAllProject();
+            if (listeProjet!=null){
+                for(int i=0; i<listeProjet.Count; i++)
+                {
+                    if (listeProjet[i].Id == idProjet)
+                    {
+                        return listeProjet[i];
+                    }
+                }
+            }
+            return null;
+            
         }
 
         public static async Task<ProjectItem> AddProject(String nom, String description)

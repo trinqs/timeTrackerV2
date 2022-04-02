@@ -14,10 +14,10 @@ namespace TimeTracker.Apps.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProjetView : BaseContentPage
     {
-        public ProjetView(ProjectItem projet)
+        public ProjetView(int idProjet)
         {
             InitializeComponent();
-            BindingContext = new ProjetViewModel(projet);
+            BindingContext = new ProjetViewModel(idProjet);
         }
 
         /*private void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
