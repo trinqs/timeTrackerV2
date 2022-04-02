@@ -40,7 +40,8 @@
                      Spacing="10">
 
             <Grid ColumnDefinitions="*,*"
-                  RowSpacing="15">
+                  RowSpacing="25"
+                  >
                 <Label Text="Nom"
                    FontSize="32"
                    TextColor="Black"
@@ -49,6 +50,8 @@
                    Grid.Row="0"/>
                 <Label Text="{Binding Projet.Name}"
                    HeightRequest="50"
+                   
+                   LineBreakMode="WordWrap"
                    FontSize="32"
                    TextColor="Black"
                    Grid.Column="1"

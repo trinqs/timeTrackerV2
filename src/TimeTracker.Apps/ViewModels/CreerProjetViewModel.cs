@@ -53,6 +53,7 @@ namespace TimeTracker.Apps.ViewModels
                 projet = await ProjetService.AddProject(Text, Description);
             }
 
+            Console.WriteLine(projet.Name + "son nom");
 
             if (projet != null)
             {

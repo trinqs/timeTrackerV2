@@ -26,7 +26,7 @@ namespace TimeTracker.Apps.WebService
 
             var resquest = new HttpRequestMessage()
             {
-                RequestUri = new Uri(Dtos.Urls.HOST + "/api/v1/projects/" + projectId.ToString() + "/tasks" + taskId.ToString()+"/times"),
+                RequestUri = new Uri(Dtos.Urls.HOST + "/api/v1/projects/" + projectId.ToString() + "/tasks/" + taskId.ToString()+"/times"),
                 Method = HttpMethod.Post,
                 Content = new StringContent(body, Encoding.UTF8, "application/json")
             };
@@ -38,7 +38,6 @@ namespace TimeTracker.Apps.WebService
 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine("avant le read de la réponse pour success");
                 JObject data = JObject.Parse(response.Content.ReadAsStringAsync().Result);
                 if (data.GetValue("is_success").ToString() == "True")
                 {
@@ -47,8 +46,7 @@ namespace TimeTracker.Apps.WebService
                 }
             }
             else
-            {
-                Console.WriteLine("avant le read de la réponse pour échec");
+            {      
                 JObject data = JObject.Parse(response.Content.ReadAsStringAsync().Result);
                 if (data.GetValue("error_code").ToString() == "Unauthorized")
                 {

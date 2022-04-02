@@ -19,18 +19,13 @@
 
                 <Entry Text="{Binding Text, Mode=TwoWay}"
                        HorizontalOptions="FillAndExpand"
+                       VerticalOptions="StartAndExpand"
                        HeightRequest="64"
                        Placeholder="Entrer un titre"/>
 
                 <Editor Text="{Binding Description, Mode=TwoWay}" 
                        AutoSize="TextChanges"
                        Placeholder="Entrer une description"
-                        IsTextPredictionEnabled="False"
-                />
-
-                <Editor Text="{Binding Description, Mode=TwoWay}" 
-                       AutoSize="TextChanges"
-                       Placeholder="Première tache"
                         IsTextPredictionEnabled="False"
                 />
             </StackLayout>
