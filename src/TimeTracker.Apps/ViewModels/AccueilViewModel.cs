@@ -68,7 +68,23 @@ namespace TimeTracker.Apps.ViewModels
             {
                 Preferences.Remove("depart");
                 Preferences.Remove("fin");
-                Seconds = TimeSpan.Zero.ToString(@"hh\:mm\:ss"); ;
+                Seconds = TimeSpan.Zero.ToString(@"hh\:mm\:ss");
+            }
+            else
+            {
+                Device.StartTimer(new TimeSpan(0, 0, 1),
+                    () =>
+                    {
+                        if (Preferences.Get("timerEnCours", false) == true)
+                        {
+                            Seconds = (DateTime.Now - Preferences.Get("depart", DateTime.Now)).ToString(@"hh\:mm\:ss");
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    });
             }
         }
 

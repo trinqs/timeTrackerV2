@@ -13,5 +13,17 @@ namespace TimeTracker.Dtos.Projects
         
         [JsonProperty("times")]
         public List<TimeItem> Times { get; set; }
+
+        [JsonIgnore]
+        public long sumTimes { get; set; }
+        
+
+        public void setSum()
+        {
+            foreach (var item in Times)
+            {
+                this.sumTimes += (long)(item.EndTime - item.StartTime).TotalSeconds;
+            }
+        }
     }
 }

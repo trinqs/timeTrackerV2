@@ -27,7 +27,7 @@
                                    TextColor="#F8F8F8"
                                    Grid.Column="0"
                                    Grid.Row="0"/>
-                            <Label Text="{Binding Times.Count}"
+                            <Label Text="{Binding sumTimes}"
                                    FontSize="32"
                                    TextColor="Black"
                                    Grid.Column="1"
@@ -45,50 +45,49 @@
                      Margin="12,30,12,50"
                      Spacing="10">
 
-            <Grid ColumnDefinitions="*,*"
-                  RowSpacing="25">
-                <Label Text="Nom"
-                   FontSize="32"
-                   TextColor="Black"
-                   HeightRequest="50"
-                   Grid.Column="0"
-                   Grid.Row="0"/>
-                <Label Text="{Binding ProjectName}"                       
-                       HeightRequest="150"                   
-                       WidthRequest="150"
-                       LineBreakMode="TailTruncation"
-                       FontSize="32"
-                       TextColor="Black"
-                       Grid.Column="1"
-                       
-                       Grid.Row="0"/>
+            
+            <Label Text="{Binding ProjectName}"                       
+                    HeightRequest="150"                   
+                    WidthRequest="150"
+                    LineBreakMode="TailTruncation"
+                    FontSize="32"
+                    TextColor="Black"/>
 
-                <Label Text="description"
-                   FontSize="20"
-                   TextColor="Black"
-                   HeightRequest="50"
-                   Grid.Column="0"
-                   Grid.Row="1"/>
-                <Label Text="{Binding ProjetDescription}"
+                
+            <Label Text="{Binding ProjetDescription}"
                    FontSize="15"
                    TextColor="Black"
-                   HeightRequest="200"
-                   Grid.Column="1"
-                   Grid.Row="1"/>
-                
+                   HeightRequest="200"/>
+
+
+            <Grid
+                ColumnDefinitions="*,*">
                 <Label Text="Temps total"
                    FontSize="20"
                    TextColor="Black"
                    HeightRequest="50"
                    Grid.Column="0"
-                   Grid.Row="2"/>
+                   Grid.Row="0"/>
                 <Label Text="{Binding Projet.TotalSeconds}"
                    FontSize="20"
                    TextColor="Black"
                    HeightRequest="50"
                    Grid.Column="1"
-                   Grid.Row="2"/>
+                   Grid.Row="0"/>
             </Grid>
+
+            <Button Text="Graphique"
+                    BackgroundColor="White"
+                    BorderColor="LightBlue"
+                    BorderWidth="2"
+                    TextColor="LightBlue"
+                    CornerRadius="32"
+                    HeightRequest="44"
+                    Command="{Binding GraphiqueCommand}"
+                 />
+
+
+
 
             <StackLayout Orientation="Horizontal">
             <Label Text="Taches"

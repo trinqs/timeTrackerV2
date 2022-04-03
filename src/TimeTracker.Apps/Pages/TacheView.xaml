@@ -5,9 +5,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:TimeTracker.Apps.ViewModels" 
              xmlns:model="clr-namespace:TimeTracker.Dtos.Projects;assembly=TimeTracker.Dtos"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:DataType="viewmodels:TacheViewModel"
              x:Class="TimeTracker.Apps.Pages.TacheView">
     <forms:BaseContentPage.Resources>
+        <ResourceDictionary>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArcConverter"/>
+        </ResourceDictionary>
+        
         <DataTemplate x:DataType="model:TimeItem" x:Key="TimeTemplate">
             <ViewCell>
                 <Frame HasShadow="False" CornerRadius="15" Margin="0,5" Padding="10" BackgroundColor="RosyBrown">
@@ -47,29 +52,29 @@
     
     <forms:BaseContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Horizontal">
-            <Label Text="Tache"
-                TextColor="Black"
-                FontSize="30"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-                <Label Text="{Binding Tache.Name}"
+            <Label Text="{Binding Tache.Name}"
                        LineBreakMode="TailTruncation"
                        VerticalOptions="CenterAndExpand" 
-                       FontSize="30"
+                       FontSize="35"
                        TextColor="Black"
                        HorizontalOptions="CenterAndExpand" />
-            </StackLayout>
             <Label Text="Historique de la tâche"
                 TextColor="Black"
-                FontSize="30"
+                FontSize="25"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"/>
-
+            
             <ListView ItemsSource="{Binding Temps}" 
                       ItemTemplate="{StaticResource TimeTemplate}"
                       HasUnevenRows="True"
-                      SelectionMode="None" />
+                      SelectionMode="Single" >
+                <ListView.Behaviors>
+                    <xct:EventToCommandBehavior
+                        EventName="ItemSelected"
+                        Command="{Binding ItemSelectedCommand}"
+                        EventArgsConverter="{StaticResource ItemSelectedEventArcConverter}"/>
+                </ListView.Behaviors>
+            </ListView>
 
             <StackLayout
                 Orientation="Horizontal">
@@ -89,16 +94,26 @@
                         HeightRequest="64"
                         WidthRequest="128"
                         Command="{Binding EditerTache}"/>
-            </StackLayout>
-            <Button Text="Stop"
+                
+                <Button Text="Supprimer le temps"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="EndAndExpand"
                         BackgroundColor="LightBlue"
                         CornerRadius="32"
                         HeightRequest="64"
                         WidthRequest="128"
-                        Command="{Binding ArreterTimer}"/>
-            <Button Text="Start"
+                        Command="{Binding SupprimerTempsCommand}"/>
+            </StackLayout>
+            
+            <Label Text="{Binding Seconds}"
+                   TextColor="Black"
+                   FontSize="32"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="EndAndExpand"
+                  />
+            <StackLayout
+                Orientation="Horizontal">
+                <Button Text="Start"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="EndAndExpand"
                         BackgroundColor="LightBlue"
@@ -106,12 +121,15 @@
                         HeightRequest="64"
                         WidthRequest="128"
                         Command="{Binding CommencerTimer}"/>
-            <Label Text="{Binding Seconds}"
-                   TextColor="Black"
-                   FontSize="32"
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="EndAndExpand"
-                  />
+                <Button Text="Stop"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="EndAndExpand"
+                        BackgroundColor="LightBlue"
+                        CornerRadius="32"
+                        HeightRequest="64"
+                        WidthRequest="128"
+                        Command="{Binding ArreterTimer}"/>
+            </StackLayout>
 
         </StackLayout>
     </forms:BaseContentPage.Content>

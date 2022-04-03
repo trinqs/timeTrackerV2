@@ -1,4 +1,5 @@
-﻿using Storm.Mvvm;
+﻿using Microcharts;
+using Storm.Mvvm;
 using Storm.Mvvm.Services;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace TimeTracker.Apps.ViewModels
         private long _idProjet;
         private ProjectItem _projet;
         private ObservableCollection<TaskItem> _taches;
+        private long _taskDuration;
 
         private string _projectName;
         private string _projectDescription;
@@ -53,10 +55,17 @@ namespace TimeTracker.Apps.ViewModels
             set => SetProperty(ref _projectDescription, value);
         }
 
+        public long TaskDuration
+        {
+            get => _taskDuration;
+            set => SetProperty(ref _taskDuration, value);
+        }
+
         public ICommand Edit { get; }
         public ICommand Supp { get; }
         public ICommand AjouterTache { get; }
         public ICommand ItemTappedCommand { get; }
+        public ICommand GraphiqueCommand { get; }
 
         public ProjetViewModel(long idProjet)
         {
@@ -66,6 +75,7 @@ namespace TimeTracker.Apps.ViewModels
             Supp = new Command(SupprimerProjet);
             AjouterTache = new Command(AddTache);
             ItemTappedCommand = new Command<TaskItem>(ItemTappedHandler);
+            GraphiqueCommand = new Command(GoToGraphique);
 
             Taches = new ObservableCollection<TaskItem>();
         }
@@ -101,6 +111,18 @@ namespace TimeTracker.Apps.ViewModels
             await navigationService.PushAsync(new TacheView(IdProjet,tacheItem.Id));
         }
 
+        private async void GoToGraphique()
+        {
+            List<ChartEntry> chartEntries = new List<ChartEntry>();
+            foreach (TaskItem tache in Taches)
+            {
+                chartEntries.Add(new ChartEntry(tache.sumTimes) { Label = tache.Name , ValueLabel = tache.sumTimes.ToString() });
+            }
+
+            INavigationService navigationService = DependencyService.Get<INavigationService>();
+            await navigationService.PushAsync(new GraphiqueView(chartEntries));
+        }
+
         private async void afficherTache()
         {
             Projet = await ProjetService.GetProjetById(IdProjet);
@@ -109,6 +131,11 @@ namespace TimeTracker.Apps.ViewModels
             ProjetDescription = Projet.Description;
 
             Taches = await TaskService.GetAllTask(Projet.Id);
+            foreach (var tache in Taches)
+            {
+                tache.setSum();
+            } 
+
         }
     }
 }
