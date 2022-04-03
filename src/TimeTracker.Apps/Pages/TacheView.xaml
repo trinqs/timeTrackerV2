@@ -54,10 +54,11 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
                 <Label Text="{Binding Tache.Name}"
-                VerticalOptions="CenterAndExpand" 
-                FontSize="30"
-                TextColor="Black"
-                HorizontalOptions="CenterAndExpand" />
+                       LineBreakMode="TailTruncation"
+                       VerticalOptions="CenterAndExpand" 
+                       FontSize="30"
+                       TextColor="Black"
+                       HorizontalOptions="CenterAndExpand" />
             </StackLayout>
             <Label Text="Historique de la tâche"
                 TextColor="Black"
@@ -72,7 +73,7 @@
 
             <StackLayout
                 Orientation="Horizontal">
-                <Button Text="Supprimer"
+                <Button Text="Supprimer la tache"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="EndAndExpand"
                         BackgroundColor="LightBlue"
@@ -80,7 +81,7 @@
                         HeightRequest="64"
                         WidthRequest="128"
                         Command="{Binding SupprimerTache}"/>
-                <Button Text="Timer"
+                <Button Text="Modifier la tache"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="EndAndExpand"
                         BackgroundColor="LightBlue"
@@ -89,7 +90,15 @@
                         WidthRequest="128"
                         Command="{Binding EditerTache}"/>
             </StackLayout>
-            <Button Text="ArreterTimer"
+            <Button Text="Stop"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="EndAndExpand"
+                        BackgroundColor="LightBlue"
+                        CornerRadius="32"
+                        HeightRequest="64"
+                        WidthRequest="128"
+                        Command="{Binding ArreterTimer}"/>
+            <Button Text="Start"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="EndAndExpand"
                         BackgroundColor="LightBlue"

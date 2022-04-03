@@ -52,7 +52,7 @@ namespace TimeTracker.Apps.ViewModels
 
             StartTimer = new Command(Start);
             StopTimer = new Command(Stop);
-            Seconds = stopwatch.Elapsed.Seconds.ToString();
+            Seconds = TimeSpan.Zero.ToString(@"hh\:mm\:ss");
 
             VoirGraphique = new Command(GoToGraphique);
             ItemTappedCommand = new Command<ProjectItem>(ItemTappedHandler);
@@ -68,7 +68,7 @@ namespace TimeTracker.Apps.ViewModels
             {
                 Preferences.Remove("depart");
                 Preferences.Remove("fin");
-                Seconds = "0";
+                Seconds = TimeSpan.Zero.ToString(@"hh\:mm\:ss"); ;
             }
         }
 

@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using TimeTracker.Apps.WebService;
 using TimeTracker.Dtos.Projects;
+using Xamarin.CommunityToolkit.Extensions;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace TimeTracker.Apps.ViewModels
@@ -24,6 +26,7 @@ namespace TimeTracker.Apps.ViewModels
         public ICommand SupprimerTache { get; }
         public ICommand EditerTache { get; }
         public ICommand CommencerTimer { get; }
+        public ICommand ArreterTimer{ get; }
 
         public long IdProjet
         {
@@ -55,8 +58,8 @@ namespace TimeTracker.Apps.ViewModels
             Temps = new List<TimeItem>();
             SupprimerTache = new Command(DeleteTache);
             //EditerTache = new Command(DeleteTache);
-            CommencerTimer = new Command(DeleteTache);
-
+            CommencerTimer = new Command(Start);
+            ArreterTimer = new Command(Stop);
         }
        public override async Task OnResume()
         {
@@ -80,6 +83,63 @@ namespace TimeTracker.Apps.ViewModels
             Tache = await TaskService.GetTaskById(IdProjet, IdTache);
             Console.WriteLine("Je suis la "+Tache.Name);
             Temps = Tache.Times;
+        }
+
+
+
+        private string _seconds;
+        public string Seconds
+        {
+            get => _seconds;
+            set => SetProperty(ref _seconds, value);
+        }
+
+        
+        private async void Start()
+        {
+            if (Preferences.Get("timerEnCours", false) == false)
+            {
+                Preferences.Set("timerEnCours", true);
+                Preferences.Set("depart", DateTime.Now);
+                Preferences.Set("idProjet", IdProjet);
+                Preferences.Set("idTache", IdTache);
+                Device.StartTimer(new TimeSpan(0, 0, 1),
+                    () =>
+                    {
+                        if (Preferences.Get("timerEnCours", false) == true)
+                        {
+                            Seconds = (DateTime.Now - Preferences.Get("depart", DateTime.Now)).ToString(@"hh\:mm\:ss");
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    });
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayToastAsync("Timer déjà en cours", 3000);
+            }
+
+        }
+
+        private async void Stop()
+        {
+            if (Preferences.Get("timerEnCours", false) == true)
+            {
+                Preferences.Set("timerEnCours", false);
+                Preferences.Set("fin", DateTime.Now);               
+                Preferences.Remove("idProjet");
+                Preferences.Remove("idTache");
+                await TimeService.AddTime(IdProjet, IdTache,
+                                     Preferences.Get("depart", DateTime.MinValue),
+                                     Preferences.Get("fin", DateTime.MinValue));               
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayToastAsync("Veuillez démarrer un timer", 3000);
+            }
         }
 
     }
