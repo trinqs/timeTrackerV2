@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Storm.Mvvm.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,12 +12,12 @@ using Xamarin.Forms.Xaml;
 namespace TimeTracker.Apps.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ModifierTache : ContentPage
+    public partial class ModifierTacheView : BaseContentPage
     {
-        public ModifierTache(long idProjet, TaskItem idtache)
+        public ModifierTacheView(long idProjet, long idtache)
         {
             InitializeComponent();
-            BindingContext = new ModifierTacheViewModel();
+            BindingContext = new ModifierTacheViewModel(idProjet, idtache);
         }
     }
 }

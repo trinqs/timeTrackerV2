@@ -1,12 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<forms:BaseContentPage xmlns:forms="clr-namespace:Storm.Mvvm.Forms;assembly=Storm.Mvvm.Forms"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TimeTracker.Apps.Pages.ModifierTache">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+             xmlns:viewmodels="clr-namespace:TimeTracker.Apps.ViewModels"
+             x:DataType="viewmodels:ModifierTacheViewModel"
+             x:Class="TimeTracker.Apps.Pages.ModifierTacheView">
+    <forms:BaseContentPage.Content>
+        <StackLayout Spacing="10">
+            <Label Text="Modifier Tache"
+                 FontSize="30"
+                 VerticalOptions="CenterAndExpand" 
+                 HorizontalOptions="CenterAndExpand"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Nom :"
+                       TextColor="Black"
+                       FontSize="20"
+                       HorizontalOptions="CenterAndExpand"/>
+                <Entry Text="{Binding NameTache}"
+                       TextColor="Black"
+                       FontSize="20"
+                       HorizontalOptions="CenterAndExpand"
+                       
+                    />
+            </StackLayout>
+
+            <Button Text="Enregistrer Modification"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    BackgroundColor="LightBlue"
+                    CornerRadius="32"
+                    HeightRequest="64"
+                    WidthRequest="128"
+                    Command="{Binding EnregistrerModification}"
+                />
+
+
         </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+    </forms:BaseContentPage.Content>
+</forms:BaseContentPage>
