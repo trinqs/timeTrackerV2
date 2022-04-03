@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TimeTracker.Apps.Modele;
 using TimeTracker.Apps.ViewModels;
 using TimeTracker.Dtos.Projects;
 using Xamarin.Forms;
@@ -27,7 +28,7 @@ namespace TimeTracker.Apps.Pages
 
         async private void ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
-            await Navigation.PushAsync(new TacheView((Dtos.Projects.TaskItem)e.Item));
+            //await Navigation.PushAsync(BindinIdProjet, new TacheView((Dtos.Projects.TaskItem)e.Item));
             //((ListView)sender).SelectedItem = null;
         }
     }

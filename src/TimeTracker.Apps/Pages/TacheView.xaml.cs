@@ -14,10 +14,10 @@ namespace TimeTracker.Apps.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TacheView : BaseContentPage
     {
-        public TacheView(TaskItem tache)
+        public TacheView(int projetId,int tacheId)
         {
             InitializeComponent();
-            BindingContext = new TacheViewModel(tache);
+            BindingContext = new TacheViewModel(projetId,tacheId);
         }
     }
 }

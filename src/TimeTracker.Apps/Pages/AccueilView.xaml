@@ -108,9 +108,7 @@
                       ItemTemplate="{StaticResource ProjetsTemplate}"
                       Margin="10"
                       HasUnevenRows="True"
-                      SelectionMode="None"
-                      
-                      >
+                      SelectionMode="None" >
                 <ListView.Behaviors>
                     <xct:EventToCommandBehavior
                         EventName="ItemTapped"

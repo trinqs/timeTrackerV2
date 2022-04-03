@@ -55,6 +55,23 @@ namespace TimeTracker.Apps.WebService
             return null;
         }
 
+        public static async Task<TaskItem> GetTaskById(int projectId, int tacheId)
+        {
+            ObservableCollection<TaskItem> listeTache= await GetAllTask(projectId);
+            if (listeTache != null)
+            {
+                for (int i = 0; i < listeTache.Count; i++)
+                {
+                    if (listeTache[i].Id == tacheId)
+                    {
+                        Console.WriteLine("GetTaskByID à fonctionné");
+                        return listeTache[i];
+                    }
+                }
+            }
+            return null;
+        }
+
         public static async Task<TaskItem> AddTask(String nom, int projectId)
         {
             HttpClient client = new HttpClient();
@@ -165,7 +182,7 @@ namespace TimeTracker.Apps.WebService
 
             HttpRequestMessage resquest = new HttpRequestMessage()
             {
-                RequestUri = new Uri(Dtos.Urls.HOST + "/api/v1/projects/" + projectId.ToString() + "/tasks" + taskId.ToString()),
+                RequestUri = new Uri(Dtos.Urls.HOST + "/api/v1/projects/" + projectId.ToString() + "/tasks/" + taskId.ToString()),
                 Method = HttpMethod.Delete
             };
 

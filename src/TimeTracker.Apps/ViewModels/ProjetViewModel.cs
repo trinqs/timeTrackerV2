@@ -56,6 +56,7 @@ namespace TimeTracker.Apps.ViewModels
         public ICommand Edit { get; }
         public ICommand Supp { get; }
         public ICommand AjouterTache { get; }
+        public ICommand ItemTappedCommand { get; }
 
         public ProjetViewModel(int idProjet)
         {
@@ -64,6 +65,7 @@ namespace TimeTracker.Apps.ViewModels
             Edit = new Command(EditerProjet);
             Supp = new Command(SupprimerProjet);
             AjouterTache = new Command(AddTache);
+            ItemTappedCommand = new Command<TaskItem>(ItemTappedHandler);
 
             Taches = new ObservableCollection<TaskItem>();
         }
@@ -91,6 +93,12 @@ namespace TimeTracker.Apps.ViewModels
         {
             INavigationService navigationService = DependencyService.Get<INavigationService>();
             await navigationService.PushAsync(new CreerTacheView((int)Projet.Id));
+        }
+
+        private async void ItemTappedHandler(TaskItem tacheItem)
+        {
+            INavigationService navigationService = DependencyService.Get<INavigationService>();
+            await navigationService.PushAsync(new TacheView(IdProjet,(int)tacheItem.Id));
         }
 
         private async void afficherTache()
