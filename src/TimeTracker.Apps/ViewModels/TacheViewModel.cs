@@ -60,11 +60,13 @@ namespace TimeTracker.Apps.ViewModels
             //EditerTache = new Command(DeleteTache);
             CommencerTimer = new Command(Start);
             ArreterTimer = new Command(Stop);
+
         }
        public override async Task OnResume()
         {
             await base.OnResume();
             afficherTime();
+            Seconds =
         }
 
         private async void DeleteTache()

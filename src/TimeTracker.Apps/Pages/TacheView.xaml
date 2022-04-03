@@ -106,6 +106,12 @@
                         HeightRequest="64"
                         WidthRequest="128"
                         Command="{Binding CommencerTimer}"/>
+            <Label Text="{Binding Seconds}"
+                   TextColor="Black"
+                   FontSize="32"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="EndAndExpand"
+                  />
 
         </StackLayout>
     </forms:BaseContentPage.Content>
