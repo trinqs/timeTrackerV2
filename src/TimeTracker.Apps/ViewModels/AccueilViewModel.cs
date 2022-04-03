@@ -123,8 +123,22 @@ namespace TimeTracker.Apps.ViewModels
             {
                 Preferences.Set("timerEnCours", false);
                 Preferences.Set("fin", DateTime.Now);
-                INavigationService navigationService = DependencyService.Get<INavigationService>();
-                await navigationService.PushAsync<CreerTempsView>();
+                if (Preferences.ContainsKey("idProjet") && Preferences.ContainsKey("idTache"))
+                {
+                    long idProjet = Preferences.Get("idProjet", long.MinValue);
+                    long idTache = Preferences.Get("idTache", long.MinValue);
+                    Preferences.Remove("idProjet");
+                    Preferences.Remove("idTache");
+                    await TimeService.AddTime(idProjet,idTache,
+                                        Preferences.Get("depart",DateTime.MinValue),
+                                        Preferences.Get("fin",DateTime.MinValue));
+                    
+                }
+                else
+                {
+                    INavigationService navigationService = DependencyService.Get<INavigationService>();
+                    await navigationService.PushAsync<CreerTempsView>();
+                }            
             }
             else
             {
