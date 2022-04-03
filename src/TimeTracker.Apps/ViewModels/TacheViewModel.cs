@@ -14,8 +14,8 @@ namespace TimeTracker.Apps.ViewModels
 {
     internal class TacheViewModel : ViewModelBase
     {
-        private int _idProjet;
-        private int _idTache;
+        private long _idProjet;
+        private long _idTache;
 
         private TaskItem _tache;
 
@@ -25,13 +25,13 @@ namespace TimeTracker.Apps.ViewModels
         public ICommand EditerTache { get; }
         public ICommand CommencerTimer { get; }
 
-        public int IdProjet
+        public long IdProjet
         {
             get => _idProjet;
             set => SetProperty(ref _idProjet, value);
         }
 
-        public int IdTache { 
+        public long IdTache { 
             get => _idTache;
             set => SetProperty(ref _idTache, value);
         } 
@@ -48,7 +48,7 @@ namespace TimeTracker.Apps.ViewModels
             set => SetProperty(ref _temps, value);
         }
 
-        public TacheViewModel(int projetId, int tacheId)
+        public TacheViewModel(long projetId, long tacheId)
         {
             IdProjet = projetId;
             IdTache = tacheId;

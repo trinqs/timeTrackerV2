@@ -15,7 +15,7 @@ namespace TimeTracker.Apps.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProjetView : BaseContentPage
     {
-        public ProjetView(int idProjet)
+        public ProjetView(long idProjet)
         {
             InitializeComponent();
             BindingContext = new ProjetViewModel(idProjet);
