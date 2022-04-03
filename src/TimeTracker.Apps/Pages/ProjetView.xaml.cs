@@ -26,10 +26,10 @@ namespace TimeTracker.Apps.Pages
             ((ListView)sender).SelectedItem = null;
         }*/
 
-        async private void ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        /*async private void ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
             //await Navigation.PushAsync(BindinIdProjet, new TacheView((Dtos.Projects.TaskItem)e.Item));
             //((ListView)sender).SelectedItem = null;
-        }
+        }*/
     }
 }
