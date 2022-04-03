@@ -17,8 +17,9 @@
                 Padding="0,20,0,20"
                 HorizontalOptions="CenterAndExpand" />
             <microcharts:ChartView 
-                x:Name="chartView" 
-                HeightRequest="300"
+                x:Name="chartView"
+                MinimumHeightRequest="300"
+                
           
                 Chart="{Binding DonutChart}" 
                 />

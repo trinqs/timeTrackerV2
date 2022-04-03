@@ -57,11 +57,13 @@
             <Label Text="{Binding ProjetDescription}"
                    FontSize="15"
                    TextColor="Black"
-                   HeightRequest="200"/>
+                   LineBreakMode="TailTruncation"
+                   HeightRequest="100"/>
 
 
             <Grid
-                ColumnDefinitions="*,*">
+                ColumnDefinitions="*,*"
+                MinimumHeightRequest="20">
                 <Label Text="Temps total"
                    FontSize="20"
                    TextColor="Black"
