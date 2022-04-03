@@ -51,7 +51,7 @@ namespace TimeTracker.Apps.ViewModels
 
             if (NameProjet != "" & DescriptionProjet!= "")
             {
-                _userInfo = await ProjetService.UpdateProject(NameProjet, DescriptionProjet, (int)Projet.Id);
+                _userInfo = await ProjetService.UpdateProject(NameProjet, DescriptionProjet, Projet.Id);
             }
 
             if (_userInfo != null)

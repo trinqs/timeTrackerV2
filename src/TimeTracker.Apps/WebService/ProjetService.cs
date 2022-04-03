@@ -54,7 +54,7 @@ namespace TimeTracker.Apps.WebService
             return null;
         }
 
-        public static async Task<ProjectItem> GetProjetById(int idProjet)
+        public static async Task<ProjectItem> GetProjetById(long idProjet)
         {
             ObservableCollection<ProjectItem> listeProjet = await GetAllProject();
             if (listeProjet!=null){
@@ -66,8 +66,7 @@ namespace TimeTracker.Apps.WebService
                     }
                 }
             }
-            return null;
-            
+            return null;            
         }
 
         public static async Task<ProjectItem> AddProject(String nom, String description)
@@ -119,7 +118,7 @@ namespace TimeTracker.Apps.WebService
             return null;
         }
 
-        public static async Task<ProjectItem> UpdateProject(String nom, String description, int projectId)
+        public static async Task<ProjectItem> UpdateProject(String nom, String description, long projectId)
         {
             HttpClient client = new HttpClient();
 
@@ -128,12 +127,6 @@ namespace TimeTracker.Apps.WebService
                 Name = nom,
                 Description = description
             };
-
-            /*ProjectItem projet = new ProjectItem()
-            {
-                Name = "projet 1",
-                Description = "C'est la descripton"
-            };*/
 
             var body = JsonConvert.SerializeObject(projet);
 
@@ -172,7 +165,7 @@ namespace TimeTracker.Apps.WebService
             return null;
         }
 
-        public static async Task<bool> DeleteProject(int projectId)
+        public static async Task<bool> DeleteProject(long projectId)
         {
             HttpClient client = new HttpClient();
 

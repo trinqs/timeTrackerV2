@@ -27,25 +27,15 @@ namespace TimeTracker.Apps.WebService
         public static async Task<String> Inscription(String email, string firstName, string lastName, string password)
         {
             HttpClient client = new HttpClient();
-            /*CreateUserRequest inscription = new CreateUserRequest()
+            CreateUserRequest inscription = new CreateUserRequest()
             {
                 ClientId = CLIENT_ID,
-                ClientSecret = CLIENT_SECRET
+                ClientSecret = CLIENT_SECRET,
                 Email = email,
                 FirstName = firstName,
                 LastName = lastName,
                 Password = password,
 
-            };*/
-
-            CreateUserRequest inscription = new CreateUserRequest()
-            {
-                ClientId = CLIENT_ID,
-                ClientSecret = CLIENT_SECRET,
-                Email = "imis46@gmail.com",
-                Password = "cours20221",
-                FirstName = "test",
-                LastName = "test"
             };
 
             var body = JsonConvert.SerializeObject(inscription);
@@ -85,8 +75,8 @@ namespace TimeTracker.Apps.WebService
             {
                 ClientId = CLIENT_ID,
                 ClientSecret = CLIENT_SECRET,
-                Password = "cours2021",
-                Login = "imis@gmail.com"
+                Password = passwordRequete,
+                Login = loginRequete
             };
 
             var body = JsonConvert.SerializeObject(login);

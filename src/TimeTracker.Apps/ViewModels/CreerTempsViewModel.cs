@@ -58,7 +58,7 @@ namespace TimeTracker.Apps.ViewModels
 
         private async void ProjetSelectionne(ProjectItem projectItem)
         {   
-            Taches = await TaskService.GetAllTask((int)projectItem.Id);
+            Taches = await TaskService.GetAllTask(projectItem.Id);
             Project = projectItem;
             ProjetChoisiBool = true;
         }
@@ -69,7 +69,7 @@ namespace TimeTracker.Apps.ViewModels
             Console.WriteLine(Preferences.Get("fin", DateTime.MinValue) + "tandis que min" + DateTime.MinValue);
             Console.WriteLine(Project.Id);
             Console.WriteLine(taskItem.Id);
-            await TimeService.AddTime( (int)Project.Id, (int) taskItem.Id, Preferences.Get("depart",DateTime.MinValue), Preferences.Get("fin",DateTime.MinValue) );   
+            await TimeService.AddTime( Project.Id, taskItem.Id, Preferences.Get("depart",DateTime.MinValue), Preferences.Get("fin",DateTime.MinValue) );   
             Preferences.Remove("depart");
             Preferences.Remove("fin");
             Preferences.Set("timerEnCours", false);

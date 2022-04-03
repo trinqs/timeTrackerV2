@@ -18,14 +18,14 @@ namespace TimeTracker.Apps.ViewModels
 {
     internal class ProjetViewModel : ViewModelBase
     {
-        private int _idProjet;
+        private long _idProjet;
         private ProjectItem _projet;
         private ObservableCollection<TaskItem> _taches;
 
         private string _projectName;
         private string _projectDescription;
 
-        public int IdProjet
+        public long IdProjet
         {
             get => _idProjet;
             set => SetProperty(ref _idProjet, value);
@@ -58,7 +58,7 @@ namespace TimeTracker.Apps.ViewModels
         public ICommand AjouterTache { get; }
         public ICommand ItemTappedCommand { get; }
 
-        public ProjetViewModel(int idProjet)
+        public ProjetViewModel(long idProjet)
         {
             IdProjet = idProjet;
 
@@ -98,7 +98,7 @@ namespace TimeTracker.Apps.ViewModels
         private async void ItemTappedHandler(TaskItem tacheItem)
         {
             INavigationService navigationService = DependencyService.Get<INavigationService>();
-            await navigationService.PushAsync(new TacheView(IdProjet,(int)tacheItem.Id));
+            await navigationService.PushAsync(new TacheView(IdProjet,tacheItem.Id));
         }
 
         private async void afficherTache()
@@ -108,7 +108,7 @@ namespace TimeTracker.Apps.ViewModels
             ProjectName = Projet.Name;
             ProjetDescription = Projet.Description;
 
-            Taches = await TaskService.GetAllTask((int)Projet.Id);
+            Taches = await TaskService.GetAllTask(Projet.Id);
         }
     }
 }

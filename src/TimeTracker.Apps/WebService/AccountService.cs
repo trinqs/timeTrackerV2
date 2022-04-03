@@ -63,13 +63,6 @@ namespace TimeTracker.Apps.WebService
                 LastName = lastName
             };
 
-            /*UserProfileResponse profil = new UserProfileResponse()
-            {
-                Email = "imis@gmail.com",
-                FirstName = "Julien",
-                LastName = "Chieze"
-            };*/
-
             var body = JsonConvert.SerializeObject(profil);
 
             var resquest = new HttpRequestMessage()

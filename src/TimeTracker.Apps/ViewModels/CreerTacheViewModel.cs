@@ -15,7 +15,7 @@ namespace TimeTracker.Apps.ViewModels
     internal class CreerTacheViewModel : ViewModelBase
     {
         private string _nomTache;
-        private int _idProjet;
+        private long _idProjet;
 
         public string NomTache
         {
@@ -23,7 +23,7 @@ namespace TimeTracker.Apps.ViewModels
             set => SetProperty(ref _nomTache, value);
         }
 
-        public int IdProjet
+        public long IdProjet
         {
             get => _idProjet;
             set => SetProperty(ref _idProjet, value);
@@ -31,7 +31,7 @@ namespace TimeTracker.Apps.ViewModels
 
         public ICommand NouveauProjet { get; }
 
-        public CreerTacheViewModel(int idProjet)
+        public CreerTacheViewModel(long idProjet)
         {
             IdProjet = idProjet;
             NomTache = "";

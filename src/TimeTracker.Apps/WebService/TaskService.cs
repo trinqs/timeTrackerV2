@@ -13,7 +13,7 @@ namespace TimeTracker.Apps.WebService
 {
     internal class TaskService
     {
-        public static async Task<ObservableCollection<TaskItem>> GetAllTask(int projectId)
+        public static async Task<ObservableCollection<TaskItem>> GetAllTask(long projectId)
 
         {
             HttpClient client = new HttpClient();
@@ -55,7 +55,7 @@ namespace TimeTracker.Apps.WebService
             return null;
         }
 
-        public static async Task<TaskItem> GetTaskById(int projectId, int tacheId)
+        public static async Task<TaskItem> GetTaskById(long projectId, long tacheId)
         {
             ObservableCollection<TaskItem> listeTache= await GetAllTask(projectId);
             if (listeTache != null)
@@ -72,7 +72,7 @@ namespace TimeTracker.Apps.WebService
             return null;
         }
 
-        public static async Task<TaskItem> AddTask(String nom, int projectId)
+        public static async Task<TaskItem> AddTask(String nom, long projectId)
         {
             HttpClient client = new HttpClient();
 
@@ -80,11 +80,6 @@ namespace TimeTracker.Apps.WebService
             {
                 Name = nom,
             };
-
-            /*TaskItem projet = new TaskItem()
-            {
-                Name = "projet 1",
-            };*/
 
             var body = JsonConvert.SerializeObject(projet);
 
@@ -124,18 +119,13 @@ namespace TimeTracker.Apps.WebService
             return null;
         }
 
-        public static async Task<TaskItem> UpdateTask(String nom, int taskId, int projectId)
+        public static async Task<TaskItem> UpdateTask(String nom, long taskId, long projectId)
         {
             HttpClient client = new HttpClient();
 
-            /*TaskItem projet = new TaskItem()
-            {
-                Name = nom,
-            };*/
-
             TaskItem projet = new TaskItem()
             {
-                Name = "projet modif",
+                Name = nom,
             };
 
             var body = JsonConvert.SerializeObject(projet);
@@ -176,7 +166,7 @@ namespace TimeTracker.Apps.WebService
             return null;
         }
 
-        public static async Task<bool> DeleteTask(int projectId, int taskId)
+        public static async Task<bool> DeleteTask(long projectId, long taskId)
         {
             HttpClient client = new HttpClient();
 

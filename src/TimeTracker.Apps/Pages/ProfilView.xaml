@@ -71,27 +71,27 @@
 
             <Button
                 Text="Editer Profil"
-                BackgroundColor="DarkBlue"
+                BackgroundColor="LightBlue"
                 CornerRadius="32"
-                TextColor="White"
+                TextColor="Black"
                 Margin="10,30,10,0"
                 IsVisible="{Binding VisibilityEditerProfil}"
                 Command="{Binding EditerProfil}"/>
 
             <Button
                 Text="Enregistrer les changements"
-                BackgroundColor="DarkBlue"
+                BackgroundColor="LightBlue"
                 CornerRadius="32"
-                TextColor="White"
+                TextColor="Black"
                 Margin="10,30,10,0"
                 IsVisible="{Binding VisibilityEnregistrerProfil}"
                 Command="{Binding EnregistrerProfil}"/>
 
             <Button
                 Text="Modifier mot de passe"
-                BackgroundColor="DarkBlue"
+                BackgroundColor="LightBlue"
                 CornerRadius="32"
-                TextColor="White"
+                TextColor="Black"
                 Margin="10,30,10,0"
                 IsVisible="{Binding VisibilityModifierMotDePasse}"
                 Command="{Binding EditerMotDePasse}"/>
@@ -133,9 +133,9 @@
 
             <Button
                 Text="Enregistrer mot de passe"
-                BackgroundColor="DarkBlue"
+                BackgroundColor="LightBlue"
                 CornerRadius="32"
-                TextColor="White"
+                TextColor="Black"
                 Margin="10,30,10,0"
                 IsVisible="{Binding VisibilityEnregistrerMotDePasse}"
                 Command="{Binding EngistrerMotDePasse}"/>

@@ -12,7 +12,7 @@ namespace TimeTracker.Apps.WebService
 {
     internal class TimeService
     {
-        public static async Task<TimeItem> AddTime(int projectId, int taskId, DateTime startTime, DateTime endTime)
+        public static async Task<TimeItem> AddTime(long projectId, long taskId, DateTime startTime, DateTime endTime)
         {
             HttpClient client = new HttpClient();
 
@@ -61,7 +61,7 @@ namespace TimeTracker.Apps.WebService
             return null;
         }
 
-        public static async Task<TimeItem> UpdateTime(int projectId, int taskId, int timeId, DateTime startTime, DateTime endTime)
+        public static async Task<TimeItem> UpdateTime(long projectId, long taskId, long timeId, DateTime startTime, DateTime endTime)
         {
             HttpClient client = new HttpClient();
 
@@ -110,7 +110,7 @@ namespace TimeTracker.Apps.WebService
             return null;
         }
 
-        public static async Task<bool> DeleteTime(int projectId, int taskId, int timeId)
+        public static async Task<bool> DeleteTime(long projectId, long taskId, long timeId)
         {
             HttpClient client = new HttpClient();
 

@@ -75,7 +75,7 @@ namespace TimeTracker.Apps.ViewModels
         private async void ItemTappedHandler(ProjectItem projectItem)
         {
             INavigationService navigationService = DependencyService.Get<INavigationService>();
-            await navigationService.PushAsync(new ProjetView((int)projectItem.Id));
+            await navigationService.PushAsync(new ProjetView(projectItem.Id));
         }
 
         private async void GoToProfil()

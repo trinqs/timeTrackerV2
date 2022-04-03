@@ -53,13 +53,15 @@
                    HeightRequest="50"
                    Grid.Column="0"
                    Grid.Row="0"/>
-                <Label Text="{Binding ProjectName}"
-                   HeightRequest="150"                   
-                   WidthRequest="150"
-                   FontSize="28"
-                   TextColor="Black"
-                   Grid.Column="1"
-                   Grid.Row="0"/>
+                <Label Text="{Binding ProjectName}"                       
+                       HeightRequest="150"                   
+                       WidthRequest="150"
+                       LineBreakMode="TailTruncation"
+                       FontSize="32"
+                       TextColor="Black"
+                       Grid.Column="1"
+                       
+                       Grid.Row="0"/>
 
                 <Label Text="description"
                    FontSize="20"
